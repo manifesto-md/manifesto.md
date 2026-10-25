@@ -1,0 +1,19 @@
+name: The Zen of Python
+kind: principles
+line: Nineteen aphorisms for the design of the Python language and of Python code, recorded as PEP 20 and printed by import this.
+canonical: https://peps.python.org/pep-0020/
+status_of_text: stable
+maintainer: Tim Peters, Python Software Foundation
+first_published: "2004-08-19"
+listing: listed
+order: 150
+tenets_label: Selected aphorisms
+tenets:
+  - Beautiful is better than ugly.
+  - Explicit is better than implicit.
+  - Simple is better than complex.
+  - Readability counts.
+  - Errors should never pass silently, unless explicitly silenced.
+  - In the face of ambiguity, refuse the temptation to guess.
+  - There should be one, and preferably only one, obvious way to do it.
+related: []

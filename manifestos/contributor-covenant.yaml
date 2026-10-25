@@ -1,0 +1,19 @@
+name: Contributor Covenant
+kind: specification
+line: A code of conduct for open source communities, adopted by tens of thousands of projects, stating the pledge, the standards, the enforcement responsibilities and the consequences.
+canonical: https://www.contributor-covenant.org/version/2/1/code_of_conduct/
+repo: https://github.com/EthicalSource/contributor_covenant
+version: "2.1"
+status_of_text: stable
+license: CC BY 4.0
+maintainer: Organization for Ethical Source
+first_published: "2014"
+listing: listed
+order: 190
+tenets_label: Structure
+tenets:
+  - Our pledge. A harassment-free experience for everyone.
+  - Our standards. Behaviour that contributes to a positive environment, and behaviour that does not.
+  - Enforcement responsibilities and scope.
+  - Enforcement guidelines, from correction to permanent ban.
+related: []

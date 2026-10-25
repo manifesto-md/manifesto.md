@@ -1,0 +1,16 @@
+name: The Cluetrain Manifesto
+kind: manifesto
+line: Ninety-five theses from 1999 on how networked markets talk and what that does to companies that still broadcast at them.
+canonical: https://www.cluetrain.com/
+status_of_text: historical
+maintainer: Rick Levine, Christopher Locke, Doc Searls, David Weinberger
+first_published: "1999-04"
+listing: listed
+order: 210
+tenets_label: Opening theses
+tenets:
+  - Markets are conversations.
+  - Markets consist of human beings, not demographic sectors.
+  - Conversations among human beings sound human.
+  - Companies that do not realize their markets are now networked person-to-person are missing their best opportunity.
+related: []

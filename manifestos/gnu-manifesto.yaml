@@ -1,0 +1,16 @@
+name: The GNU Manifesto
+kind: manifesto
+line: Richard Stallman's 1985 statement of why a complete free Unix-compatible system was being written and what free software means, the founding document of the free software movement.
+canonical: https://www.gnu.org/gnu/manifesto.html
+status_of_text: historical
+maintainer: Richard Stallman, Free Software Foundation
+first_published: "1985-03"
+listing: listed
+order: 200
+tenets_label: What it argues
+tenets:
+  - Software should be free to share and change; the golden rule requires it.
+  - GNU is a complete Unix-compatible system that is not Unix.
+  - Programmers can be paid without restricting users.
+  - Free software is a matter of freedom, not price.
+related: []

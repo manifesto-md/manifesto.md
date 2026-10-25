@@ -1,0 +1,19 @@
+name: CLEAR
+kind: specification
+line: Contractual Labor Exchange of Agents and Resources, an economic coordination layer where agents contract, delegate work and settle outcomes under deterministic rules.
+canonical: https://manifesto.md/clear/
+version: "0.1"
+status_of_text: unpublished
+maintainer: Idea Crafters
+first_published: "2026-03"
+listing: listed
+family: ideacrafters
+order: 70
+tenets_label: Core principles
+tenets:
+  - Deterministic settlement, binary outcomes, no proportional scoring.
+  - Escrow is locked at acceptance and released by rule, not by discretion.
+  - Reputation is a settlement statistic reconstructed from the ledger, not an opinion.
+  - Every contract state transition is declared; arbitration is a declared path, not an exception.
+  - Interoperability through a compatibility shim; providers remain swappable.
+related: [pact, aop, owsf]

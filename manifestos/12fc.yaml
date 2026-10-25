@@ -1,0 +1,30 @@
+name: 12-Factor AI-enabled CLI
+short: 12fc
+kind: specification
+line: Twelve testable factors for a command-line tool whose operator may be a human or an AI agent, from machine-readable capabilities to meaningful exit codes, with a conformance gate.
+canonical: https://github.com/hop-top/spec-12fc/blob/main/specs/v0.1/spec.md
+repo: https://github.com/hop-top/spec-12fc
+version: "0.1"
+status_of_text: draft
+maintainer: hop.top, published by Idea Crafters
+first_published: "2026-04"
+listing: claimed
+claimed_at: "2026-10-25"
+claimed_by: maintainer
+family: ideacrafters
+order: 10
+tenets_label: The twelve factors
+tenets:
+  - Capability introspection. The CLI exposes its capabilities in a machine-readable format.
+  - Intent clarity. Commands express intent, not syntax.
+  - Structured I/O. Machine-readable output with a stable schema, strict channel discipline.
+  - Corrective error model. Errors carry a stable code, the failing input, a transience class and a suggested fix.
+  - Explicit contracts. Idempotency, side effects, retry semantics, schema versioning and partial failure are declared.
+  - Previewability. Every mutating operation can be previewed; nothing blocks on a prompt without a TTY.
+  - Idempotency by default, or declared otherwise with a safe retry strategy.
+  - State transparency. All implicit state is inspectable.
+  - Contextual guidance. Help that answers the situation, not the flag list.
+  - Delegation safety. Scoped permissions, confirmation policies, sandboxing, rate limits, policy enforcement.
+  - Exit code semantics. Zero means success, never a swallowed error; failure classes are distinguishable.
+  - Evolution guarantees. Changes announce themselves; renaming an error code is a breaking change.
+related: [aop, pact, 12-factor-app, 12-factor-agents]

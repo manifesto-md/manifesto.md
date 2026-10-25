@@ -1,0 +1,28 @@
+name: Purpose-bound Access Control and Trust
+short: PACT
+kind: specification
+line: How an AI agent proves who it acts for, with what declared purpose and evidence, to a gateway that already authenticates and authorizes; a PACT pass never grants access and a native denial always wins.
+canonical: https://github.com/hop-top/poly-pact/tree/next/spec/v1.0
+repo: https://github.com/hop-top/poly-pact
+version: "1.0.0-alpha.0"
+status_of_text: draft
+license: MIT
+maintainer: hop.top, published by Idea Crafters; brand home context.help
+first_published: "2026-10"
+listing: claimed
+claimed_at: "2026-10-25"
+claimed_by: maintainer
+family: ideacrafters
+order: 20
+tenets_label: Behavioural invariants
+tenets:
+  - Native authority is preserved. Admission and reputation cannot override native authentication or authorization.
+  - Required fields have required provenance. Security-relevant claims need a trusted source with authority over them.
+  - The presenter is bound to the subject. No reuse of another agent's identity or evidence without a recognized delegation.
+  - A result is request-specific. Profile, intent, principal, gateway, requirement version and operation are bound together.
+  - No positive result from uncertainty. Missing evidence, stale state or an unavailable dependency never yields admissible.
+  - Learning stays within policy. Autonomous changes cannot remove immutable requirements or expand native authority.
+  - Reputation follows evidence; incidents survive decay.
+  - Every completed authenticated evaluation has a receipt.
+related: [aop, 12fc]
+note: The text is edited in the poly-pact repository; a read-only mirror named spec-pact is planned and this link moves there when it exists.

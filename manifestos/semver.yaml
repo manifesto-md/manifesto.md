@@ -1,0 +1,20 @@
+name: Semantic Versioning
+short: SemVer
+kind: specification
+line: A version number of the form major.minor.patch and the rules for when each part increments, so dependency declarations mean the same thing to everyone.
+canonical: https://semver.org/spec/v2.0.0.html
+repo: https://github.com/semver/semver
+version: "2.0.0"
+status_of_text: stable
+license: CC BY 3.0
+maintainer: Tom Preston-Werner and the semver maintainers
+first_published: "2013-06-18"
+listing: listed
+order: 160
+tenets_label: The rule
+tenets:
+  - Major version when you make incompatible API changes.
+  - Minor version when you add functionality in a backward compatible manner.
+  - Patch version when you make backward compatible bug fixes.
+  - Pre-release and build metadata are available as extensions.
+related: [conventional-commits, keep-a-changelog]

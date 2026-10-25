@@ -1,0 +1,18 @@
+name: Conventional Commits
+kind: specification
+line: A lightweight convention on top of commit messages, type, scope and description, that machines and people can read and that maps onto semantic versions.
+canonical: https://www.conventionalcommits.org/en/v1.0.0/
+repo: https://github.com/conventional-commits/conventionalcommits.org
+version: "1.0.0"
+status_of_text: stable
+license: CC BY 3.0
+maintainer: The Conventional Commits maintainers
+first_published: "2019"
+listing: listed
+order: 170
+tenets_label: The shape
+tenets:
+  - "type(scope): description, then an optional body and footers."
+  - fix correlates with a patch, feat with a minor, a breaking change footer or an exclamation mark with a major.
+  - Types beyond fix and feat are allowed and recommended, such as build, chore, ci, docs, style, refactor, perf, test.
+related: [semver, keep-a-changelog]

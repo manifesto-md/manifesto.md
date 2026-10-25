@@ -1,0 +1,20 @@
+name: Claim or remove a listing
+description: You maintain a listed document and want the listing marked claimed, corrected, or removed
+title: "Claim: "
+labels: ["claim"]
+body:
+  - type: input
+    id: slug
+    attributes: { label: Listing URL (https://manifesto.md/<slug>/) }
+    validations: { required: true }
+  - type: dropdown
+    id: action
+    attributes: { label: What do you want, options: ["Mark as claimed", "Correct the entry (say what below)", "Remove the listing"] }
+    validations: { required: true }
+  - type: textarea
+    id: proof
+    attributes: { label: How we can see you maintain it, description: A commit, a maintainers file, or an org membership we can check. }
+    validations: { required: true }
+  - type: textarea
+    id: notes
+    attributes: { label: Corrections or notes }

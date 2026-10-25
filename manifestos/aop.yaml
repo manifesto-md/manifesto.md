@@ -1,0 +1,26 @@
+name: Agent Operation Protocol
+short: AOP
+kind: specification
+line: Six laws a system must enforce at its API boundary so that any actor, human or agent, can act on a shared operational graph without breaking it.
+canonical: https://agentoperationprotocol.org/v0.6/
+repo: https://github.com/AgentOperation/Protocol
+version: "0.6"
+status_of_text: draft
+license: CC BY 4.0 (text), MIT (checker)
+maintainer: AgentOperation, published by Idea Crafters
+first_published: "2026-03-12"
+listing: claimed
+claimed_at: "2026-10-25"
+claimed_by: maintainer
+family: ideacrafters
+order: 30
+tenets_label: The six laws
+tenets:
+  - Read before write. A mutation of an entity the actor has not read in the current operation context is rejected.
+  - Validate schema before mutation. Writes that do not match the declared schema are rejected.
+  - Preserve graph integrity. No dangling relations, no missing targets, no forbidden cycles; deletes follow the declared rule.
+  - Emit an event for every mutation, before success is returned. No silent writes.
+  - Check capabilities at action time. A revoked grant takes effect on the next request.
+  - Respect lifecycle gates. No undeclared transitions; each declared one needs its capability.
+  - Rejections are typed and structured, four fields, never silent; governance rejections are audited.
+related: [pact, 12fc, owsf]

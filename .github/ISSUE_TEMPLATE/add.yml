@@ -1,0 +1,25 @@
+name: Add a document
+description: Ask for a manifesto, principles page or specification to be listed (or open a pull request directly)
+title: "Add: "
+labels: ["add"]
+body:
+  - type: input
+    id: name
+    attributes: { label: Document name }
+    validations: { required: true }
+  - type: input
+    id: canonical
+    attributes: { label: Canonical URL (the author's) }
+    validations: { required: true }
+  - type: dropdown
+    id: kind
+    attributes: { label: Kind, options: ["manifesto", "principles", "specification"] }
+    validations: { required: true }
+  - type: textarea
+    id: line
+    attributes: { label: One sentence saying what it is for }
+    validations: { required: true }
+  - type: dropdown
+    id: maintainer
+    attributes: { label: Are you a maintainer of this document?, options: ["No", "Yes (this will be a claimed listing)"] }
+    validations: { required: true }

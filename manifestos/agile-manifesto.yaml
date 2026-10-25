@@ -1,0 +1,17 @@
+name: Manifesto for Agile Software Development
+short: Agile Manifesto
+kind: manifesto
+line: Four value pairs and twelve principles for developing software, written by seventeen practitioners in 2001; the document the word agile points at.
+canonical: https://agilemanifesto.org/
+status_of_text: historical
+maintainer: The seventeen signatories, hosted at agilemanifesto.org
+first_published: "2001-02"
+listing: listed
+order: 100
+tenets_label: The four values
+tenets:
+  - Individuals and interactions over processes and tools.
+  - Working software over comprehensive documentation.
+  - Customer collaboration over contract negotiation.
+  - Responding to change over following a plan.
+related: [12-factor-app]

@@ -1,0 +1,25 @@
+name: 12-Factor Agents
+kind: principles
+line: Principles for building LLM-powered software reliable enough to put in front of production customers, modelled on the Twelve-Factor App and maintained in the open.
+canonical: https://github.com/humanlayer/12-factor-agents
+repo: https://github.com/humanlayer/12-factor-agents
+status_of_text: stable
+maintainer: Dex Horthy, HumanLayer
+first_published: "2025-04"
+listing: listed
+order: 120
+tenets_label: Factors (titles as published)
+tenets:
+  - Natural language to tool calls.
+  - Own your prompts.
+  - Own your context window.
+  - Tools are just structured outputs.
+  - Unify execution state and business state.
+  - Launch, pause, resume with simple APIs.
+  - Contact humans with tool calls.
+  - Own your control flow.
+  - Compact errors into context window.
+  - Small, focused agents.
+  - Trigger from anywhere, meet users where they are.
+  - Make your agent a stateless reducer.
+related: [12-factor-app, 12fc]

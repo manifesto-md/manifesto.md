@@ -1,0 +1,21 @@
+name: crtx
+kind: specification
+line: The wire and storage shape for AI agent conversations, sessions, turns, content parts, tool calls and the envelope that carries them, so runtime tools agree on one record.
+canonical: https://github.com/hop-top/spec-crtx/blob/main/specs/v0.1/envelope.md
+repo: https://github.com/hop-top/spec-crtx
+version: "0.1"
+status_of_text: draft
+maintainer: hop.top, published by Idea Crafters
+first_published: "2026-05"
+listing: claimed
+claimed_at: "2026-10-25"
+claimed_by: maintainer
+family: ideacrafters
+order: 50
+tenets_label: What it fixes
+tenets:
+  - One envelope for a conversation, versioned by a field, so implementations speak several versions side by side.
+  - Sessions, turns, content parts and tool calls have one shape across tools.
+  - A bus event taxonomy names what happened to a conversation.
+  - Pin to a spec version; the main branch is not a contract.
+related: [owsf, vstar]

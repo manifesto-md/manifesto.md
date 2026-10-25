@@ -1,0 +1,22 @@
+name: Open Workspace Schema Framework
+short: OWSF
+kind: specification
+line: A portable, append-only workspace artifact model for execution continuity, replay, handoff and forking across tools; structure and invariants, not orchestration or transport.
+canonical: https://github.com/hop-top/spec-owsf/blob/main/specs/v1.0/core.md
+repo: https://github.com/hop-top/spec-owsf
+version: "1.0"
+status_of_text: draft
+maintainer: hop.top, published by Idea Crafters
+first_published: "2026"
+listing: claimed
+claimed_at: "2026-10-25"
+claimed_by: maintainer
+family: ideacrafters
+order: 40
+tenets_label: What it fixes
+tenets:
+  - A workspace is an append-only artifact; history is never rewritten.
+  - Continuity, replay, handoff and forking are properties of the artifact, not of the tool that wrote it.
+  - Invariants are normative; runtime orchestration and transport are out of scope.
+  - Integrations declare how they reference a workspace, not how they run it.
+related: [crtx, vstar, aop]

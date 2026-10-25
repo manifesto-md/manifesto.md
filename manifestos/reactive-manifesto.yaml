@@ -1,0 +1,16 @@
+name: The Reactive Manifesto
+kind: manifesto
+line: Four traits of systems built to meet modern demands, responsive, resilient, elastic and message driven, published in 2013 and revised in 2014, with thousands of signatories.
+canonical: https://www.reactivemanifesto.org/
+status_of_text: stable
+maintainer: Jonas Bonér and co-authors
+first_published: "2013"
+listing: listed
+order: 130
+tenets_label: The four traits
+tenets:
+  - Responsive. The system responds in a timely manner if at all possible.
+  - Resilient. The system stays responsive in the face of failure.
+  - Elastic. The system stays responsive under varying workload.
+  - Message driven. Asynchronous message passing establishes boundaries between components.
+related: [12-factor-app]

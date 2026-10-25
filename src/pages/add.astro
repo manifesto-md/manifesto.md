@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Add a document to manifesto.md" description="How to list a manifesto, principles page or specification: one YAML file by pull request." path="/add/">
+  <main id="main" class="wrap">
+    <h1>Add a document</h1>
+    <p class="lede">One YAML file in <code>manifestos/</code>, by pull request. Public documents only; the directory links, it does not copy.</p>
+    <pre><code>{`# manifestos/<slug>.yaml
+name: Keep a Changelog
+kind: specification            # manifesto | specification | principles
+line: One sentence saying what the document is for, under 240 characters.
+canonical: https://keepachangelog.com/en/1.1.0/
+repo: https://github.com/olivierlacan/keep-a-changelog
+version: "1.1.0"               # the version this page was read against
+status_of_text: stable         # draft | stable | historical
+license: MIT                    # licence of the text, when stated
+maintainer: Olivier Lacan
+first_published: 2014
+listing: listed                 # maintainers set claimed in their own PR
+tenets_label: Guiding principles
+tenets:
+  - Changelogs are for humans, not machines.
+  - There should be an entry for every single version.
+related: [semver, conventional-commits]`}</code></pre>
+    <h2>Rules</h2>
+    <ul>
+      <li>The tenets are the document's own headings or principles, quoted or closely paraphrased, never our commentary. Up to twenty.</li>
+      <li>The canonical URL is the author's. Mirrors and summaries are not accepted as canonical.</li>
+      <li>No logos. Names only.</li>
+      <li>Documents the directory lists without the author asking get an issue on the author's repository, or an email where the project asks for that, saying the listing exists and how to claim or remove it. Removal on request, no questions.</li>
+      <li>Claiming: the maintainer opens or approves the pull request that sets <code>listing: claimed</code>, or replies yes on the listing issue. A reaction is not a claim.</li>
+    </ul>
+    <p>The repository has issue templates for both: <a href="https://github.com/manifesto-md/manifesto.md/issues/new/choose">add or claim a listing</a>.</p>
+  </main>
+</Base>

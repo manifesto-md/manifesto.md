@@ -1,0 +1,89 @@
+---
+interface Props { title: string; description: string; path?: string }
+const { title, description, path = '/' } = Astro.props;
+const url = new URL(path, Astro.site ?? 'https://manifesto.md').href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/json" href="/index.json" title="manifesto.md catalog" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top">
+      <div class="wrap bar">
+        <a class="brand" href="/">manifesto<span>.md</span></a>
+        <nav aria-label="Primary">
+          <a href="/#catalog">Catalog</a>
+          <a href="/badge/">Badge</a>
+          <a href="/add/">Add yours</a>
+          <a href="https://github.com/manifesto-md/manifesto.md">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <slot />
+    <footer class="foot">
+      <div class="wrap">
+        <p>A directory of the documents projects stand on: manifestos, principles and specifications. Listing links to the author's own text and asserts nothing about it; a claimed listing has been confirmed by its maintainer. Names belong to their owners.</p>
+        <p>Catalog text © Idea Crafters, CC BY 4.0. Site code MIT. <a href="https://github.com/manifesto-md/manifesto.md">Source and contributions</a>.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fbfbf9; --ink: #16181d; --muted: #5c6370; --rule: #e3e1da; --accent: #1d4ed8; --accent-ink: #ffffff; --card: #ffffff; --tag: #eef2ff; --tag-ink: #1e3a8a;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0f1115; --ink: #e8e8e3; --muted: #9aa1ad; --rule: #272b33; --accent: #93b4ff; --accent-ink: #0f1115; --card: #161920; --tag: #1b2436; --tag-ink: #c7d6ff; }
+  }
+  :root[data-theme="dark"] { --bg: #0f1115; --ink: #e8e8e3; --muted: #9aa1ad; --rule: #272b33; --accent: #93b4ff; --accent-ink: #0f1115; --card: #161920; --tag: #1b2436; --tag-ink: #c7d6ff; }
+  * { box-sizing: border-box; }
+  html { font-family: var(--sans); color: var(--ink); background: var(--bg); line-height: 1.55; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); }
+  a { color: var(--accent); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--accent); color: var(--accent-ink); padding: 6px 10px; }
+  .skip:focus { left: 8px; z-index: 50; }
+  .top { border-bottom: 1px solid var(--rule); background: var(--bg); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; padding: 14px 16px; }
+  .brand { font-family: var(--mono); font-weight: 700; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--muted); }
+  .top nav { display: flex; gap: 6px 20px; flex-wrap: wrap; }
+  .top nav a { text-decoration: none; color: var(--ink); font-weight: 500; }
+  main { padding: 32px 0 56px; }
+  h1 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+  .lede { font-size: 1.1rem; color: var(--muted); max-width: 68ch; margin: 0 0 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; list-style: none; padding: 0; margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .card h3 { margin: 0; font-size: 1.05rem; }
+  .card h3 a { color: var(--ink); text-decoration: none; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .meta { display: flex; gap: 6px; flex-wrap: wrap; font-size: 0.78rem; font-family: var(--mono); }
+  .tag { background: var(--tag); color: var(--tag-ink); border-radius: 4px; padding: 1px 7px; }
+  .tag.claimed { background: var(--accent); color: var(--accent-ink); }
+  .tenets { padding-left: 1.3em; }
+  .tenets li { margin: 6px 0; }
+  .facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; font-size: 0.95rem; margin: 20px 0; }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; overflow-wrap: anywhere; }
+  pre, code { font-family: var(--mono); font-size: 0.9em; }
+  pre { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px; overflow-x: auto; }
+  .foot { border-top: 1px solid var(--rule); padding: 28px 0 40px; color: var(--muted); font-size: 0.9rem; }
+  .foot p { max-width: 80ch; }
+  .notice { border-left: 3px solid var(--accent); padding: 8px 14px; background: var(--card); margin: 16px 0; }
+</style>

@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { catalog, KIND_LABEL } from '../lib/catalog';
+const entries = await catalog();
+const groups = [
+  { key: 'house', title: 'From Idea Crafters', blurb: 'The documents our own tools stand on, listed in the order a request meets them: how an agent talks to a tool, who it acts for, what the system then accepts, and how work and conversations are kept.' , filter: (e: any) => e.data.family === 'ideacrafters' },
+  { key: 'others', title: 'From everyone else', blurb: 'Documents the industry stands on. Listed because they are public and worth reading side by side; a listing asserts nothing beyond the link.', filter: (e: any) => e.data.family !== 'ideacrafters' },
+];
+---
+<Base title="manifesto.md: the documents projects stand on" description="A directory of manifestos, principles and specifications, each linking to its canonical text, with a badge maintainers can claim.">
+  <main id="main" class="wrap">
+    <h1>The documents projects stand on.</h1>
+    <p class="lede">Manifestos, principles and specifications, one page each, linking to the canonical text and the version it was read against. Maintainers claim their listing; the badge says so.</p>
+    <section id="catalog">
+      {groups.map((g) => { const items = entries.filter(g.filter); return items.length ? (
+        <>
+          <h2>{g.title}</h2>
+          <p class="lede">{g.blurb}</p>
+          <ul class="grid">
+            {items.map((e) => (
+              <li class="card">
+                <h3><a href={`/${e.id}/`}>{e.data.name}</a></h3>
+                <p>{e.data.line}</p>
+                <div class="meta">
+                  <span class="tag">{KIND_LABEL[e.data.kind]}</span>
+                  {e.data.version && <span class="tag">v{e.data.version}</span>}
+                  <span class={`tag ${e.data.listing}`}>{e.data.status_of_text === 'unpublished' ? 'text not yet public' : e.data.listing}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null; })}
+    </section>
+    <h2>Add a document, claim a listing</h2>
+    <p>Anyone may add a public manifesto, principles page or specification by pull request; the <a href="/add/">add page</a> has the file shape. A maintainer claims a listing by opening the pull request themselves, or by saying yes on the issue we open when we list a document we did not write. Claimed listings carry the badge state <code>claimed</code>; the rest say <code>listed</code>.</p>
+  </main>
+</Base>

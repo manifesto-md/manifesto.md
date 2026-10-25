@@ -1,0 +1,21 @@
+name: Keep a Changelog
+kind: specification
+line: A format for a changelog file that people can read, one entry per version, grouped by the kind of change, newest first.
+canonical: https://keepachangelog.com/en/1.1.0/
+repo: https://github.com/olivierlacan/keep-a-changelog
+version: "1.1.0"
+status_of_text: stable
+maintainer: Olivier Lacan
+first_published: "2014"
+listing: listed
+order: 180
+tenets_label: Guiding principles
+tenets:
+  - Changelogs are for humans, not machines.
+  - There should be an entry for every single version.
+  - The same types of changes should be grouped.
+  - Versions and sections should be linkable.
+  - The latest version comes first.
+  - The release date of each version is displayed.
+  - Mention whether you follow Semantic Versioning.
+related: [semver, conventional-commits]

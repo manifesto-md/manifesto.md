@@ -1,0 +1,22 @@
+name: V*
+short: vstar
+kind: specification
+line: Agentic-system state, worlds, missions, players, turns, observations and decisions, represented as iCalendar and vCard components so agent work rides existing calendar and contact tooling instead of a bespoke protocol.
+canonical: https://github.com/hop-top/poly-vstar/tree/main/spec/v1.0
+repo: https://github.com/hop-top/poly-vstar
+version: "1.0.0-alpha.1"
+status_of_text: draft
+maintainer: hop.top, published by Idea Crafters
+first_published: "2026-09"
+listing: claimed
+claimed_at: "2026-10-25"
+claimed_by: maintainer
+family: ideacrafters
+order: 60
+tenets_label: What it fixes
+tenets:
+  - Time, identity and sequence semantics already exist in RFC 5545 and RFC 6350; agent state maps onto them instead of inventing a protocol.
+  - Each state component has one canonical mapping and a canonicalization rule, so two implementations produce the same bytes.
+  - Versions are independent directories; breaking changes open a new one.
+related: [owsf, crtx]
+note: Two public copies exist today, an older v0.1 in spec-vstar and this v1.0 line in poly-vstar; the link points at the newer text until the two are reconciled.

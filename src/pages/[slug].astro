@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { catalog, badge, KIND_LABEL } from '../lib/catalog';
+export async function getStaticPaths() {
+  const entries = await catalog();
+  return entries.map((e) => ({ params: { slug: e.id }, props: { e, entries } }));
+}
+const { e, entries } = Astro.props;
+const d = e.data;
+const related = d.related.map((slug: string) => entries.find((x) => x.id === slug)).filter(Boolean);
+const b = badge(e);
+const badgeUrl = `https://img.shields.io/endpoint?url=https://manifesto.md/badge/${e.id}.json`;
+const unpublished = d.status_of_text === 'unpublished';
+---
+<Base title={`${d.name} on manifesto.md`} description={d.line} path={`/${e.id}/`}>
+  <main id="main" class="wrap">
+    <p class="meta"><span class="tag">{KIND_LABEL[d.kind]}</span>{d.version && <span class="tag">v{d.version}</span>}<span class={`tag ${d.listing}`}>{unpublished ? 'text not yet public' : d.listing}</span></p>
+    <h1>{d.name}{d.short && d.short !== d.name ? ` (${d.short})` : ''}</h1>
+    <p class="lede">{d.line}</p>
+    {unpublished && <div class="notice">The text behind this listing is not public yet. The page exists so the family is complete; the badge and the canonical link go live with the text.</div>}
+    {d.note && <div class="notice">{d.note}</div>}
+    <h2>{d.tenets_label}</h2>
+    <ol class="tenets">{d.tenets.map((t: string) => <li>{t}</li>)}</ol>
+    <p>Read the text itself: {unpublished ? <span>not yet published</span> : <a href={d.canonical} rel="noopener">{d.canonical}</a>}{d.version ? `, written against version ${d.version}.` : '.'} This page is a pointer, not a copy; the author's text is the only normative one.</p>
+    <h2>Facts</h2>
+    <dl class="facts">
+      <dt>Maintainer</dt><dd>{d.maintainer}</dd>
+      {d.repo && <><dt>Repository</dt><dd><a href={d.repo} rel="noopener">{d.repo}</a></dd></>}
+      {d.license && <><dt>Licence of the text</dt><dd>{d.license}</dd></>}
+      {d.first_published && <><dt>First published</dt><dd>{d.first_published}</dd></>}
+      <dt>Status of the text</dt><dd>{d.status_of_text}</dd>
+      <dt>Listing</dt><dd>{d.listing}{d.claimed_at ? ` (${d.claimed_at}${d.claimed_by ? `, by ${d.claimed_by}` : ''})` : ''}</dd>
+    </dl>
+    {related.length > 0 && <><h2>Read with</h2><ul>{related.map((r: any) => <li><a href={`/${r.id}/`}>{r.data.name}</a>: {r.data.line}</li>)}</ul></>}
+    {!unpublished && <>
+      <h2>Badge</h2>
+      <p><img src={badgeUrl} alt={`manifesto.md: ${b.message}`} width="140" height="20" /></p>
+      <pre><code>{`[![manifesto.md](${badgeUrl})](https://manifesto.md/${e.id}/)`}</code></pre>
+      <p>{d.listing === 'claimed' ? 'This listing is claimed by its maintainer.' : 'Maintainers: to claim this listing, open a pull request on the directory setting listing: claimed, or reply yes on the listing issue. The badge then reads claimed.'}</p>
+    </>}
+  </main>
+</Base>
