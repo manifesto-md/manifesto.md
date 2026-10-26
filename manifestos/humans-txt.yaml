@@ -1,0 +1,22 @@
+name: humans.txt
+kind: convention
+line: A plain text file in the site root, next to robots.txt, that names the people who built a website and the standards and tools it uses.
+canonical: https://humanstxt.org/
+status_of_text: stable
+license: CC BY-NC-SA 3.0
+publisher: community
+maintainer: The humans.txt H-team
+listing: listed
+tenets_label: The guidelines
+tenets:
+  - We are people, not machines.
+  - It's an initiative for knowing the people behind a website.
+  - It's a TXT file that contains information about the different people who have contributed to building the website.
+  - Because it's something simple and fast to create. Because it's not intrusive with the code.
+  - We want to provide some guidelines to make the humans.txt as standard as possible.
+  - The file is named humans.txt, in lower case, UTF-8 encoded, in the site root. Just next to the robots.txt file.
+  - "TEAM: role and name, contact, Twitter username and location of each person."
+  - "THANKS: name or URL of those you want to thank."
+  - "SITE: last update, standards, components and software used in development."
+  - Add a link tag in the head of the site, with rel="author" and type="text/plain", pointing at /humans.txt.
+related: [robots-txt]

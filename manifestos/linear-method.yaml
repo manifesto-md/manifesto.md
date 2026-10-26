@@ -1,0 +1,21 @@
+name: Linear Method
+kind: principles
+line: Linear's principles and practices for building software products, from setting product direction to launching and building in public.
+canonical: https://linear.app/method
+status_of_text: stable
+publisher: company
+maintainer: Linear
+listing: listed
+tenets_label: Principles and practices
+tenets:
+  - Set the product direction
+  - Set useful goals
+  - Prioritize enablers and blockers
+  - Scope projects down
+  - Generate momentum
+  - Write issues not user stories
+  - Manage design projects
+  - Build with users
+  - Launch and keep launching
+  - Build in public
+related: [shape-up, agile-manifesto]

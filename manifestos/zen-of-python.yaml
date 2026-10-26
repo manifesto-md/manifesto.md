@@ -3,6 +3,7 @@ kind: principles
 line: Nineteen aphorisms for the design of the Python language and of Python code, recorded as PEP 20 and printed by import this.
 canonical: https://peps.python.org/pep-0020/
 status_of_text: stable
+publisher: individual
 maintainer: Tim Peters, Python Software Foundation
 first_published: "2004-08-19"
 listing: listed

@@ -3,14 +3,16 @@ import Base from '../layouts/Base.astro';
 import { catalog, KIND_LABEL } from '../lib/catalog';
 const entries = await catalog();
 const groups = [
-  { key: 'house', title: 'From Idea Crafters', blurb: 'The documents our own tools stand on, listed in the order a request meets them: how an agent talks to a tool, who it acts for, what the system then accepts, and how work and conversations are kept.' , filter: (e: any) => e.data.family === 'ideacrafters' },
-  { key: 'others', title: 'From everyone else', blurb: 'Documents the industry stands on. Listed because they are public and worth reading side by side; a listing asserts nothing beyond the link.', filter: (e: any) => e.data.family !== 'ideacrafters' },
+  { key: 'specs', title: 'Specifications and protocols', blurb: 'Documents that say what a conforming system or tool must do, agent protocols included. Competing specifications sit side by side on purpose.', filter: (e: any) => e.data.kind === 'specification' },
+  { key: 'conventions', title: 'File and format conventions', blurb: 'The files a repository or a site publishes so that tools, crawlers and agents know what to expect: each one has a canonical text that says what the file means.', filter: (e: any) => e.data.kind === 'convention' },
+  { key: 'companies', title: 'From companies', blurb: 'Principles and manifestos published by businesses about how they build and work. Listed as published; a listing asserts nothing about the company.', filter: (e: any) => !['specification','convention'].includes(e.data.kind) && e.data.publisher === 'company' },
+  { key: 'community', title: 'From communities, foundations and individuals', blurb: 'The manifestos and principles the craft stands on, from the Agile Manifesto onward.', filter: (e: any) => !['specification','convention'].includes(e.data.kind) && e.data.publisher !== 'company' },
 ];
 ---
 <Base title="manifesto.md: the documents projects stand on" description="A directory of manifestos, principles and specifications, each linking to its canonical text, with a badge maintainers can claim.">
   <main id="main" class="wrap">
     <h1>The documents projects stand on.</h1>
-    <p class="lede">Manifestos, principles and specifications, one page each, linking to the canonical text and the version it was read against. Maintainers claim their listing; the badge says so.</p>
+    <p class="lede">Manifestos, principles and specifications, one page each, linking to the canonical text and the version it was read against. Maintainers claim their listing; the badge says so. Seven of the specifications are ours; they are listed under the same rules as everyone else's.</p>
     <section id="catalog">
       {groups.map((g) => { const items = entries.filter(g.filter); return items.length ? (
         <>

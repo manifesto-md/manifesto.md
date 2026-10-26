@@ -3,6 +3,7 @@ kind: manifesto
 line: Four traits of systems built to meet modern demands, responsive, resilient, elastic and message driven, published in 2013 and revised in 2014, with thousands of signatories.
 canonical: https://www.reactivemanifesto.org/
 status_of_text: stable
+publisher: community
 maintainer: Jonas Bonér and co-authors
 first_published: "2013"
 listing: listed

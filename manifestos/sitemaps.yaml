@@ -1,0 +1,25 @@
+name: Sitemaps XML format
+short: Sitemaps
+kind: convention
+line: An XML file listing the URLs of a site, with optional last-modified, change-frequency and priority hints, that webmasters publish so search engines can crawl more intelligently.
+canonical: https://www.sitemaps.org/protocol.html
+version: "0.90"
+status_of_text: stable
+license: CC BY-SA 2.5
+publisher: community
+maintainer: sitemaps.org, sponsored by Google, Yahoo! and Microsoft
+listing: listed
+tenets_label: The protocol
+tenets:
+  - Sitemaps are an easy way for webmasters to inform search engines about pages on their sites that are available for crawling.
+  - The Sitemap protocol format consists of XML tags; the file itself must be UTF-8 encoded.
+  - Begin with an opening <urlset> tag and end with a closing </urlset> tag, specifying the namespace http://www.sitemaps.org/schemas/sitemap/0.9.
+  - Include a <url> entry for each URL, as a parent XML tag.
+  - Include a <loc> child entry for each <url> parent tag.
+  - The <lastmod>, <changefreq> and <priority> tags are optional.
+  - All data values in a Sitemap must be entity-escaped.
+  - Each Sitemap file that you provide must have no more than 50,000 URLs and must be no larger than 50MB (52,428,800 bytes).
+  - A Sitemap index file lists multiple Sitemaps, up to 50,000; it can only specify Sitemaps that are found on the same site as the Sitemap index file.
+  - The location of a Sitemap file determines the set of URLs that can be included in that Sitemap; all URLs must share its protocol and host.
+  - "Point search engines to a Sitemap with a Sitemap line in robots.txt, for example Sitemap: http://www.example.com/sitemap.xml."
+related: [robots-txt, llms-txt]

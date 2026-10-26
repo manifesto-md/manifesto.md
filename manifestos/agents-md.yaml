@@ -1,0 +1,25 @@
+name: AGENTS.md
+kind: convention
+line: A Markdown file at the root of a repository that gives AI coding agents the context and instructions a new teammate would need, kept separate from the human README.
+canonical: https://agents.md/
+repo: https://github.com/agentsmd/agents.md
+status_of_text: stable
+license: MIT
+publisher: foundation
+maintainer: Agentic AI Foundation, under the Linux Foundation
+listing: listed
+tenets_label: How to use AGENTS.md
+tenets:
+  - A simple, open format for guiding coding agents.
+  - Think of AGENTS.md as a README for agents, a dedicated, predictable place to provide the context and instructions to help AI coding agents work on your project.
+  - README.md files are for humans, quick starts, project descriptions, and contribution guidelines; AGENTS.md complements this by containing the extra, sometimes detailed context coding agents need.
+  - Create an AGENTS.md file at the root of the repository.
+  - Cover what matters; add sections that help an agent work effectively with your project, such as project overview, build and test commands, code style guidelines, testing instructions and security considerations.
+  - Commit messages or pull request guidelines, security gotchas, large datasets, deployment steps, anything you'd tell a new teammate belongs here too.
+  - Large monorepo? Use nested AGENTS.md files for subprojects; agents automatically read the nearest file in the directory tree, so the closest one takes precedence.
+  - There are no required fields; AGENTS.md is just standard Markdown.
+  - The closest AGENTS.md to the edited file wins; explicit user chat prompts override everything.
+  - Will the agent run testing commands found in AGENTS.md automatically? Yes, if you list them.
+  - Treat AGENTS.md as living documentation.
+  - One AGENTS.md works across many agents.
+related: [12fc, llms-txt, mcp]

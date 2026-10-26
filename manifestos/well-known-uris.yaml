@@ -1,0 +1,25 @@
+name: Well-Known Uniform Resource Identifiers
+short: /.well-known/
+kind: convention
+line: A reserved path prefix, /.well-known/, under which registered site-wide metadata such as security.txt lives, so applications can discover information about an origin, defined by RFC 8615.
+canonical: https://www.rfc-editor.org/rfc/rfc8615.html
+status_of_text: stable
+license: IETF Trust Legal Provisions (BCP 78)
+publisher: foundation
+maintainer: IETF; author Mark Nottingham
+first_published: "2019-05"
+listing: listed
+tenets_label: The rules
+tenets:
+  - Some applications on the Web require the discovery of information about an origin, sometimes called "site-wide metadata", before making a request.
+  - This memo reserves a path prefix in HTTP, HTTPS, WebSocket (WS), and Secure WebSocket (WSS) URIs for these "well-known locations", "/.well-known/".
+  - A well-known URI is a URI whose path component begins with the characters "/.well-known/", and whose scheme is "HTTP", "HTTPS", or another scheme that has explicitly been specified to use well-known URIs.
+  - Well-known URIs can also be used with other URI schemes, but only when those schemes' definitions explicitly allow it.
+  - Applications that wish to mint new well-known URIs MUST register them, following the procedures in Section 5.1.
+  - Registered names MUST conform to the "segment-nz" production in RFC 3986; this means they cannot contain the "/" character.
+  - At a minimum, a registration will reference a specification that defines the format and associated media type(s).
+  - Well-known URIs are rooted in the top of the path's hierarchy; they are not well-known by definition in other parts of the path.
+  - Clients should not expect a resource to exist at "/.well-known/" itself.
+  - "Registration requests consist of at least the following information: URI suffix, change controller, specification document(s), status and related information."
+  - Because well-known locations effectively represent the entire origin, server operators should appropriately control the ability to write to them.
+related: [security-txt, robots-txt]

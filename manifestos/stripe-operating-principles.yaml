@@ -1,0 +1,17 @@
+name: Stripe Operating Principles
+kind: principles
+line: The six principles Stripe lists under "How we operate" on its careers site to describe how it expects people to work.
+canonical: https://stripe.com/jobs/culture
+status_of_text: stable
+publisher: company
+maintainer: Stripe
+listing: listed
+tenets_label: How we operate
+tenets:
+  - Users first
+  - Create with craft and beauty
+  - Move with urgency and focus
+  - Collaborate egolessly
+  - Stay curious
+  - Obsess over talent
+related: [amazon-leadership-principles, linear-method]

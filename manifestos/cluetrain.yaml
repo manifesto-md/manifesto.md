@@ -3,6 +3,7 @@ kind: manifesto
 line: Ninety-five theses from 1999 on how networked markets talk and what that does to companies that still broadcast at them.
 canonical: https://www.cluetrain.com/
 status_of_text: historical
+publisher: community
 maintainer: Rick Levine, Christopher Locke, Doc Searls, David Weinberger
 first_published: "1999-04"
 listing: listed

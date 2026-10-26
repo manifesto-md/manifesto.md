@@ -6,6 +6,7 @@ canonical: https://github.com/hop-top/spec-owsf/blob/main/specs/v1.0/core.md
 repo: https://github.com/hop-top/spec-owsf
 version: "1.0"
 status_of_text: draft
+publisher: project
 maintainer: hop.top, published by Idea Crafters
 first_published: "2026"
 listing: claimed

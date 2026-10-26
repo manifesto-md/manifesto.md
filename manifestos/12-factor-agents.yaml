@@ -4,6 +4,7 @@ line: Principles for building LLM-powered software reliable enough to put in fro
 canonical: https://github.com/humanlayer/12-factor-agents
 repo: https://github.com/humanlayer/12-factor-agents
 status_of_text: stable
+publisher: company
 maintainer: Dex Horthy, HumanLayer
 first_published: "2025-04"
 listing: listed

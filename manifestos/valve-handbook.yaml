@@ -1,0 +1,26 @@
+name: Valve Handbook for New Employees
+kind: principles
+line: Valve's guide for new hires on working in a company with no managers, which it describes as an abbreviated encapsulation of its guiding principles.
+canonical: https://cdn.fastly.steamstatic.com/apps/valve/Valve_NewEmployeeHandbook.pdf
+version: First edition
+status_of_text: stable
+publisher: company
+maintainer: Valve Corporation
+first_published: "2012-03"
+listing: listed
+tenets_label: Parts
+tenets:
+  - Welcome to Valve
+  - Welcome to Flatland
+  - Settling In
+  - What to Work On
+  - Teams, Hours, and the Office
+  - Risks
+  - How Am I Doing?
+  - Your Peers and Your Performance
+  - Choose Your Own Adventure
+  - Valve Is Growing
+  - Your Most Important Role
+  - What Is Valve Not Good At?
+related: [netflix-culture, gitlab-values]
+note: Linked from Valve's publications page at https://www.valvesoftware.com/en/publications.

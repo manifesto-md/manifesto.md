@@ -23,4 +23,4 @@ export function badge(e: Entry) {
   };
 }
 
-export const KIND_LABEL: Record<string, string> = { manifesto: 'Manifesto', specification: 'Specification', principles: 'Principles' };
+export const KIND_LABEL: Record<string, string> = { manifesto: 'Manifesto', specification: 'Specification', principles: 'Principles', convention: 'Convention' };

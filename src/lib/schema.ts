@@ -1,8 +1,9 @@
 import { z } from 'astro/zod';
 
-export const kinds = ['manifesto', 'specification', 'principles'] as const;
+export const kinds = ['manifesto', 'specification', 'principles', 'convention'] as const;
 export const listings = ['listed', 'claimed'] as const;
 export const textStatus = ['draft', 'stable', 'historical', 'unpublished'] as const;
+export const publishers = ['company', 'community', 'individual', 'foundation', 'project'] as const;
 
 // YAML parses bare dates as Date objects; accept both and keep the date part.
 const dateish = z.union([z.string(), z.date()]).transform((d) => (d instanceof Date ? d.toISOString().slice(0, 10) : d));
@@ -18,6 +19,7 @@ export const manifestoSchema = z.object({
   status_of_text: z.enum(textStatus).default('stable'),
   license: z.string().optional(),
   maintainer: z.string(),
+  publisher: z.enum(publishers).default('project'),
   first_published: dateish.pipe(z.string().regex(/^\d{4}(-\d{2}(-\d{2})?)?$/)).optional(),
   listing: z.enum(listings).default('listed'),
   claimed_at: dateish.optional(),

@@ -7,6 +7,7 @@ repo: https://github.com/AgentOperation/Protocol
 version: "0.6"
 status_of_text: draft
 license: CC BY 4.0 (text), MIT (checker)
+publisher: project
 maintainer: AgentOperation, published by Idea Crafters
 first_published: "2026-03-12"
 listing: claimed

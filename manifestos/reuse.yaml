@@ -1,0 +1,27 @@
+name: REUSE Specification
+short: REUSE
+kind: convention
+line: A standardised way to declare copyright and licensing for every file in a project, using SPDX identifiers in comment headers, a LICENSES directory and REUSE.toml.
+canonical: https://reuse.software/spec-3.3/
+repo: https://github.com/fsfe/reuse-website
+version: "3.3"
+status_of_text: stable
+license: CC BY-SA 4.0
+publisher: foundation
+maintainer: Free Software Foundation Europe
+first_published: "2024-11-14"
+listing: listed
+tenets_label: The requirements
+tenets:
+  - This specification defines a standardised method for declaring copyright and licensing for software projects.
+  - The goal of the specification is to have comprehensive, unambiguous, human- and machine-readable copyright and licensing information for each individual file in a project.
+  - A Project MUST include a License File for every license under which Covered Files are licensed, in the LICENSES directory.
+  - The name of the License File MUST be the SPDX License Identifier of the license; for a license not in the SPDX License List, its SPDX License Identifier MUST be LicenseRef-[idstring].
+  - Each Covered File MUST have Licensing Information associated with it.
+  - It is RECOMMENDED to use the SPDX-FileCopyrightText tag for Copyright Notices.
+  - The SPDX-License-Identifier tag MUST be followed by a valid SPDX License Expression.
+  - Comment headers are the RECOMMENDED method.
+  - Licensing Information MAY be associated with a file through a REUSE.toml file, which MUST be a valid TOML file.
+  - REUSE.toml and DEP5 are mutually exclusive. You MUST NOT use both simultaneously; DEP5 is deprecated and you SHOULD create a REUSE.toml file instead.
+  - You SHOULD use SPDX snippets to license Snippets; each opened snippet MUST be closed with SPDX-SnippetEnd.
+related: [spdx, citation-cff]

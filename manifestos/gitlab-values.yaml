@@ -1,0 +1,20 @@
+name: GitLab Values
+short: CREDIT
+kind: principles
+line: The six values GitLab's public handbook uses to guide behaviour and decisions across the company, summed up by the acronym CREDIT.
+canonical: https://handbook.gitlab.com/handbook/values/
+repo: https://gitlab.com/gitlab-com/content-sites/handbook
+status_of_text: stable
+license: CC BY-SA 4.0
+publisher: company
+maintainer: GitLab
+listing: listed
+tenets_label: CREDIT
+tenets:
+  - Collaboration
+  - Results for Customers
+  - Efficiency
+  - Diversity, Inclusion & Belonging
+  - Iteration
+  - Transparency
+related: [posthog-values, netflix-culture]

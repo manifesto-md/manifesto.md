@@ -1,0 +1,20 @@
+name: Agent2Agent Protocol
+short: A2A
+kind: specification
+line: An open protocol for communication and interoperability between opaque agentic applications, with JSON-RPC, gRPC and HTTP+JSON bindings and an Agent Card for discovery.
+canonical: https://a2a-protocol.org/latest/specification/
+repo: https://github.com/a2aproject/A2A
+version: "1.0.0"
+status_of_text: stable
+license: Apache 2.0
+publisher: foundation
+maintainer: A2A Technical Steering Committee, Linux Foundation
+listing: listed
+tenets_label: Guiding principles
+tenets:
+  - "Simple: reuse existing, well-understood standards (HTTP, JSON-RPC 2.0, Server-Sent Events)."
+  - "Enterprise Ready: address authentication, authorization, security, privacy, tracing, and monitoring by aligning with established enterprise practices."
+  - "Async First: designed for (potentially very) long-running tasks and human-in-the-loop interactions."
+  - "Modality Agnostic: support exchange of diverse content types including text, audio/video, structured data/forms, and potentially embedded UI components."
+  - "Opaque Execution: agents collaborate based on declared capabilities and exchanged information, without needing to share their internal thoughts, plans, or tool implementations."
+related: [mcp, aop]

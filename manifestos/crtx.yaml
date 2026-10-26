@@ -5,6 +5,7 @@ canonical: https://github.com/hop-top/spec-crtx/blob/main/specs/v0.1/envelope.md
 repo: https://github.com/hop-top/spec-crtx
 version: "0.1"
 status_of_text: draft
+publisher: project
 maintainer: hop.top, published by Idea Crafters
 first_published: "2026-05"
 listing: claimed

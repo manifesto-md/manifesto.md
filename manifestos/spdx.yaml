@@ -1,0 +1,28 @@
+name: System Package Data Exchange
+short: SPDX
+kind: convention
+line: An open standard data model and serialisations for communicating bill-of-materials information about software, including licensing, security, build, AI and dataset metadata.
+canonical: https://spdx.github.io/spdx-spec/v3.0.1/
+repo: https://github.com/spdx/spdx-spec
+version: "3.0.1"
+status_of_text: stable
+license: Community Specification License 1.0 (earlier portions CC BY 3.0)
+publisher: foundation
+maintainer: The Linux Foundation, SPDX project
+listing: listed
+tenets_label: Scope
+tenets:
+  - The System Package Data Exchange (SPDX) specification defines an open standard for communicating bill of materials information for different topic areas.
+  - A data exchange format so that information about software packages and related content may be collected and shared in a common format, with the goal of saving time and improving data accuracy.
+  - Accurate identification of software is key for many supply chain processes.
+  - SPDX defines an underlying data model as well as multiple serialization formats to encode that data model.
+  - SPDX metadata includes software composition (packages, files and snippets), build information, AI models and datasets.
+  - SPDX metadata includes creator, supplier and distributor identity, and provenance and integrity.
+  - SPDX metadata includes licenses and copyrights, including a curated list of licenses and exceptions.
+  - SPDX metadata includes security vulnerabilities, defects and other quality data, relationships between system elements, and software usage and lifecycle.
+  - SPDX metadata includes mechanisms for annotating SPDX elements and linking multiple SPDX Documents.
+  - SPDX is organized in areas of interest or profiles focused on specific user needs; the Core Profile is mandatory, all others are optional.
+  - Conformance to the Core Profile compliance point is mandatory for all other SPDX profiles.
+  - The Lite Profile captures the minimum set of information required for license compliance.
+  - The SPDX specification is a freely available international open standard (ISO/IEC 5962:2021).
+related: [reuse, citation-cff]

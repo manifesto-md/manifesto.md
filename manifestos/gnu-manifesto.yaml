@@ -3,6 +3,7 @@ kind: manifesto
 line: Richard Stallman's 1985 statement of why a complete free Unix-compatible system was being written and what free software means, the founding document of the free software movement.
 canonical: https://www.gnu.org/gnu/manifesto.html
 status_of_text: historical
+publisher: community
 maintainer: Richard Stallman, Free Software Foundation
 first_published: "1985-03"
 listing: listed

@@ -1,0 +1,27 @@
+name: Amazon Leadership Principles
+kind: principles
+line: The sixteen principles Amazon says it uses every day when discussing ideas, solving problems and hiring, published on its jobs site.
+canonical: https://www.amazon.jobs/content/en/our-workplace/leadership-principles
+status_of_text: stable
+publisher: company
+maintainer: Amazon
+listing: listed
+tenets_label: The principles
+tenets:
+  - Customer Obsession
+  - Ownership
+  - Invent and Simplify
+  - Are Right, A Lot
+  - Learn and Be Curious
+  - Hire and Develop the Best
+  - Insist on the Highest Standards
+  - Think Big
+  - Bias for Action
+  - Frugality
+  - Earn Trust
+  - Dive Deep
+  - Have Backbone; Disagree and Commit
+  - Deliver Results
+  - Strive to be Earth's Best Employer
+  - Success and Scale Bring Broad Responsibility
+related: [netflix-culture, google-ten-things]

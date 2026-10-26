@@ -1,0 +1,25 @@
+name: Shape Up
+kind: principles
+line: Basecamp's method for product development in six-week cycles, in three parts, shaping the work, betting on it, and building it, written as a free online book.
+canonical: https://basecamp.com/shapeup
+status_of_text: stable
+publisher: company
+maintainer: Ryan Singer, 37signals
+listing: listed
+tenets_label: Chapters
+tenets:
+  - Principles of Shaping
+  - Set Boundaries
+  - Find the Elements
+  - Risks and Rabbit Holes
+  - Write the Pitch
+  - Bets, Not Backlogs
+  - The Betting Table
+  - Place Your Bets
+  - Hand Over Responsibility
+  - Get One Piece Done
+  - Map the Scopes
+  - Show Progress
+  - Decide When to Stop
+  - Move On
+related: [linear-method, agile-manifesto]

@@ -1,0 +1,26 @@
+name: The Mozilla Manifesto
+kind: manifesto
+line: Mozilla's ten principles for an internet that is open, accessible and enriches people's lives, with a 2017 addendum pledging a healthy internet.
+canonical: https://www.mozilla.org/en-US/about/manifesto/
+status_of_text: stable
+publisher: foundation
+maintainer: Mozilla Foundation
+first_published: "2007"
+listing: listed
+tenets_label: Principles
+tenets:
+  - The internet is an integral part of modern life, a key component in education, communication, collaboration, business, entertainment and society as a whole.
+  - The internet is a global public resource that must remain open and accessible.
+  - The internet must enrich the lives of individual human beings.
+  - Individuals' security and privacy on the internet are fundamental and must not be treated as optional.
+  - Individuals must have the ability to shape the internet and their own experiences on it.
+  - The effectiveness of the internet as a public resource depends upon interoperability (protocols, data formats, content), innovation and decentralized participation worldwide.
+  - Free and open source software promotes the development of the internet as a public resource.
+  - Transparent community-based processes promote participation, accountability and trust.
+  - Commercial involvement in the development of the internet brings many benefits; a balance between commercial profit and public benefit is critical.
+  - Magnifying the public benefit aspects of the internet is an important goal, worthy of time, attention and commitment.
+  - We are committed to an internet that includes all the peoples of the earth, where a person's demographic characteristics do not determine their online access, opportunities, or quality of experience.
+  - We are committed to an internet that promotes civil discourse, human dignity, and individual expression.
+  - We are committed to an internet that elevates critical thinking, reasoned argument, shared knowledge, and verifiable facts.
+  - We are committed to an internet that catalyzes collaboration among diverse communities working together for the common good.
+related: [gnu-manifesto, cluetrain, local-first]

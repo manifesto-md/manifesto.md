@@ -1,0 +1,21 @@
+name: Ten things we know to be true
+kind: principles
+line: Google's ten-point philosophy, first written when the company was a few years old and kept as a public statement of how it builds products.
+canonical: https://about.google/company-info/philosophy/
+status_of_text: stable
+publisher: company
+maintainer: Google
+listing: listed
+tenets_label: The ten things
+tenets:
+  - Focus on the user and all else will follow.
+  - It's best to do one thing really, really well.
+  - Fast is better than slow.
+  - Democracy on the web works.
+  - You don't need to be at your desk to need an answer.
+  - You can make money without doing evil.
+  - There's always more information out there.
+  - The need for information crosses all borders.
+  - You can be serious without a suit.
+  - Great just isn't good enough.
+related: [amazon-leadership-principles, unix-philosophy]

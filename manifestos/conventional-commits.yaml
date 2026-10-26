@@ -6,6 +6,7 @@ repo: https://github.com/conventional-commits/conventionalcommits.org
 version: "1.0.0"
 status_of_text: stable
 license: CC BY 3.0
+publisher: community
 maintainer: The Conventional Commits maintainers
 first_published: "2019"
 listing: listed

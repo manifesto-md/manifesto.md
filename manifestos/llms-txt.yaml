@@ -1,0 +1,28 @@
+name: The /llms.txt file
+short: llms.txt
+kind: convention
+line: A proposal for a Markdown file at /llms.txt that gives language models a curated overview of a website and links to clean Markdown versions of its pages.
+canonical: https://llmstxt.org/
+repo: https://github.com/AnswerDotAI/llms-txt
+version: "2"
+status_of_text: stable
+license: Apache-2.0
+publisher: individual
+maintainer: Jeremy Howard
+first_published: "2024-09-03"
+listing: listed
+tenets_label: The proposal
+tenets:
+  - We propose adding a /llms.txt markdown file to websites to provide LLM-friendly content.
+  - Context windows, while larger than they were, are still too small for most websites in their entirety.
+  - The llms.txt file is unusual in that it uses Markdown to structure the information rather than a classic structured format such as XML.
+  - An H1 with the name of the project or site. This is the only required section.
+  - A blockquote with a short summary of the project, containing key information necessary for understanding the rest of the file.
+  - Zero or more markdown sections (e.g. paragraphs, lists, etc) of any type except headings.
+  - Zero or more markdown sections delimited by H2 headers, containing file lists of URLs where further detail is available; each item is a markdown link, optionally followed by a colon and notes.
+  - The "Optional" section is used, by convention, for secondary information that can be skipped if a shorter context is needed.
+  - Provide a clean markdown version of those pages at the same URL as the original page, but with .md appended.
+  - llms.txt is designed to coexist with current web standards.
+  - While sitemaps list all pages for search engines, llms.txt offers a curated overview for LLMs.
+  - It can complement robots.txt by providing context for allowed content.
+related: [agents-md, robots-txt]

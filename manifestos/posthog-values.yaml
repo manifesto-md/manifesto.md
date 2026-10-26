@@ -1,0 +1,17 @@
+name: PostHog Values
+kind: principles
+line: The five values in PostHog's public handbook that describe how the company expects its team to work and decide.
+canonical: https://posthog.com/handbook/values
+repo: https://github.com/PostHog/posthog.com
+status_of_text: stable
+publisher: company
+maintainer: PostHog
+listing: listed
+tenets_label: The values
+tenets:
+  - You're the driver
+  - Make it public
+  - Do more weird
+  - Why not now?
+  - Optimistic by default
+related: [gitlab-values, linear-method]

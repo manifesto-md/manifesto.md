@@ -1,0 +1,27 @@
+name: Robots Exclusion Protocol
+short: robots.txt
+kind: convention
+line: The rules a service publishes at /robots.txt to tell crawlers which URIs they may access, as standardised by the IETF in RFC 9309 from Martijn Koster's 1994 method.
+canonical: https://www.rfc-editor.org/rfc/rfc9309.html
+status_of_text: stable
+license: IETF Trust Legal Provisions (BCP 78)
+publisher: foundation
+maintainer: IETF; authors Martijn Koster, Gary Illyes, Henner Zeller and Lizzi Sassman
+first_published: "2022-09"
+listing: listed
+tenets_label: The rules
+tenets:
+  - This document specifies the rules originally defined by the "Robots Exclusion Protocol" that crawlers are requested to honor when accessing URIs.
+  - The rules MUST be accessible in a file named "/robots.txt" (all lowercase) in the top-level path of the service, UTF-8 encoded and served as text/plain.
+  - A group is one or more user-agent lines that are followed by one or more rules; a rule is a line with a key-value pair that defines how a crawler may access URIs.
+  - Crawlers MUST use case-insensitive matching to find the group that matches the product token; if no group matches, they follow the "*" group if one exists.
+  - Allow and disallow lines indicate whether accessing a URI that matches the corresponding path is allowed or disallowed; the matching MUST start with the first octet of the path.
+  - The most specific match found MUST be used; the most specific match is the match that has the most octets.
+  - If no matching rule exists, the URI is allowed.
+  - Crawlers MUST support the special characters "#" (line comment), "$" (end of the match pattern) and "*" (0 or more instances of any character).
+  - The crawlers SHOULD follow at least five consecutive redirects, even across authorities.
+  - A 4xx status code means robots.txt is unavailable and the crawler MAY access any resources on the server.
+  - A 5xx status code means robots.txt is unreachable and the crawler MUST assume complete disallow.
+  - Crawlers SHOULD NOT use the cached version for more than 24 hours, unless the robots.txt file is unreachable.
+  - The parsing limit MUST be at least 500 kibibytes.
+related: [llms-txt, security-txt]

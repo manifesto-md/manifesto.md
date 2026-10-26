@@ -4,6 +4,7 @@ line: Twelve factors for building software-as-a-service applications that are po
 canonical: https://12factor.net/
 repo: https://github.com/heroku/12factor
 status_of_text: stable
+publisher: company
 maintainer: Adam Wiggins, Heroku
 first_published: "2011"
 listing: listed

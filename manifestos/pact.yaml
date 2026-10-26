@@ -7,6 +7,7 @@ repo: https://github.com/hop-top/poly-pact
 version: "1.0.0-alpha.0"
 status_of_text: draft
 license: MIT
+publisher: project
 maintainer: hop.top, published by Idea Crafters; brand home context.help
 first_published: "2026-10"
 listing: claimed

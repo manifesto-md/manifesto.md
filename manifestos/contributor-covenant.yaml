@@ -6,6 +6,7 @@ repo: https://github.com/EthicalSource/contributor_covenant
 version: "2.1"
 status_of_text: stable
 license: CC BY 4.0
+publisher: community
 maintainer: Organization for Ethical Source
 first_published: "2014"
 listing: listed

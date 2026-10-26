@@ -4,6 +4,7 @@ kind: manifesto
 line: Four value pairs and twelve principles for developing software, written by seventeen practitioners in 2001; the document the word agile points at.
 canonical: https://agilemanifesto.org/
 status_of_text: historical
+publisher: community
 maintainer: The seventeen signatories, hosted at agilemanifesto.org
 first_published: "2001-02"
 listing: listed

@@ -1,0 +1,26 @@
+name: Agentic Permissions Policy Algebra
+short: OpenAPPA
+kind: specification
+line: A declarative policy format and deterministic engine that labels data flowing between an LLM agent and its tools, so restricted data cannot reach audiences it was never allowed to reach.
+canonical: https://www.openappa.com/contracts
+repo: https://github.com/archestra-ai/OpenAPPA
+version: "v0.37.0"
+status_of_text: draft
+license: MIT
+publisher: company
+maintainer: Archestra.AI
+first_published: "2026-08-18"
+listing: listed
+tenets_label: Core concepts
+tenets:
+  - An OpenAPPA policy defines restrictions on tool results and requirements for tool calls.
+  - An audience identifies who can receive data.
+  - Trust describes how much OpenAPPA can rely on the data the agent has received.
+  - Effects record successful actions.
+  - Attention requires fresh approval for each call.
+  - An annotator classifies a tool call.
+  - A sanitizer cleans or validates data before an agent or tool receives it.
+  - An authority reviews a tool call that would otherwise be blocked.
+  - Remedy plans give the agent ways to continue when a call is blocked or a result would add restrictions.
+related: [pact, aop, mcp]
+note: Labelled Preview and RFC by its authors; the policy file format is version 2 and the wire protocol version 1.

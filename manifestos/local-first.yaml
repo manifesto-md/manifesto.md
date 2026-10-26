@@ -3,6 +3,7 @@ kind: principles
 line: Seven ideals for software that keeps the primary copy of data on the user's device while still supporting collaboration, from the Ink and Switch essay that named the category.
 canonical: https://www.inkandswitch.com/local-first/
 status_of_text: stable
+publisher: individual
 maintainer: Martin Kleppmann, Adam Wiggins, Peter van Hardenberg, Mark McGranaghan (Ink and Switch)
 first_published: "2019-04"
 listing: listed

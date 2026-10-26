@@ -1,0 +1,30 @@
+name: security.txt
+kind: convention
+line: A machine-parsable file at /.well-known/security.txt in which an organisation states how security researchers should report vulnerabilities to it, defined by RFC 9116.
+canonical: https://www.rfc-editor.org/rfc/rfc9116.html
+repo: https://github.com/securitytxt/security-txt
+status_of_text: stable
+license: IETF Trust Legal Provisions (BCP 78)
+publisher: foundation
+maintainer: IETF (Informational); authors Edwin Foudil and Yakov Shafranovich
+first_published: "2022-04"
+listing: listed
+tenets_label: The format
+tenets:
+  - When security vulnerabilities are discovered by researchers, proper reporting channels are often lacking.
+  - In this document, we define a richer, machine-parsable, and more extensible way for organizations to communicate information about their security disclosure practices and ways to contact them.
+  - For web-based services, organizations MUST place the "security.txt" file under the "/.well-known/" path.
+  - The file MUST be accessed via HTTP 1.0 or a higher version, and the file access MUST use the "https" scheme.
+  - The file MUST have a Content-Type of "text/plain" with the default charset parameter set to "utf-8".
+  - The format of this file is machine parsable and MUST follow the ABNF grammar defined in Section 4.
+  - Unless otherwise stated, all fields MUST be considered optional.
+  - The "Contact" field MUST always be present in a "security.txt" file.
+  - The "Expires" field MUST always be present and MUST NOT appear more than once.
+  - The "Canonical" field indicates the canonical URIs where the "security.txt" file is located.
+  - The "Encryption" field indicates an encryption key that security researchers should use for encrypted communication; keys MUST NOT appear in this field.
+  - The "Policy" field indicates a link to where the vulnerability disclosure policy is located.
+  - If the "Preferred-Languages" field is absent, security researchers may assume that English is the language to be used.
+  - The "Acknowledgments" field indicates a link to a page where security researchers are recognized for their reports.
+  - The "Hiring" field is used for linking to the vendor's security-related job positions.
+  - It is RECOMMENDED that a "security.txt" file be digitally signed using an OpenPGP cleartext signature.
+related: [robots-txt, well-known-uris]

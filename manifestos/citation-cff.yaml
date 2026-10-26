@@ -1,0 +1,25 @@
+name: Citation File Format
+short: CFF
+kind: convention
+line: A CITATION.cff file in the root of a repository that gives human- and machine-readable citation metadata for software or a dataset, in YAML.
+canonical: https://citation-file-format.github.io/
+repo: https://github.com/citation-file-format/citation-file-format
+version: "1.2.0"
+status_of_text: stable
+license: CC BY 4.0
+publisher: project
+maintainer: Stephan Druskat and Jurriaan H. Spaaks
+listing: listed
+tenets_label: The format
+tenets:
+  - CITATION.cff files are plain text files with human- and machine-readable citation information for software (and datasets).
+  - Code developers can include them in their repositories to let others know how to correctly cite their software.
+  - Copy and paste the example into the root of your code repository, and adapt the information to your software.
+  - The file must be named CITATION.cff (note the capitalization) and be valid YAML 1.2.
+  - The keys cff-version, message, title and authors are required.
+  - The type of the work that is being described by this CITATION.cff file is software or dataset; the default is software.
+  - preferred-citation is a reference to another work that should be cited instead of the software or dataset itself.
+  - references are reference(s) to other creative works, for example to make visible the work that your own work builds on.
+  - When there are multiple licenses, it is assumed their relationship is OR, not AND.
+  - If you publish your software in an archive or registry, they (or their systems) can re-use the citation metadata; GitHub, Zenodo and Zotero read the file.
+related: [reuse, spdx]

@@ -6,6 +6,7 @@ canonical: https://github.com/hop-top/poly-vstar/tree/main/spec/v1.0
 repo: https://github.com/hop-top/poly-vstar
 version: "1.0.0-alpha.1"
 status_of_text: draft
+publisher: project
 maintainer: hop.top, published by Idea Crafters
 first_published: "2026-09"
 listing: claimed

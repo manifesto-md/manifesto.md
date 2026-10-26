@@ -1,0 +1,16 @@
+name: Netflix Culture Memo
+kind: manifesto
+line: Netflix's statement of how it works, from the dream team it hires to the preference for people over process, published on its jobs site.
+canonical: https://jobs.netflix.com/culture
+status_of_text: stable
+publisher: company
+maintainer: Netflix
+listing: listed
+tenets_label: Sections
+tenets:
+  - The Dream Team
+  - People Over Process
+  - Uncomfortably Exciting
+  - Artistic Expression
+  - Great and Always Better
+related: [amazon-leadership-principles, gitlab-values]

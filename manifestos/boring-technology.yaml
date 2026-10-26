@@ -1,0 +1,19 @@
+name: Choose Boring Technology
+kind: principles
+line: Dan McKinley's argument for spending a company's few innovation tokens deliberately and preferring well-understood technology with known failure modes.
+canonical: https://boringtechnology.club/
+status_of_text: stable
+publisher: individual
+maintainer: Dan McKinley
+listing: listed
+tenets_label: The argument
+tenets:
+  - We all get a limited number of innovation tokens to spend; early on in a company's life, we get maybe three.
+  - Software that's been around longer tends to need less care and feeding than software that just came out.
+  - Pick the smallest set of tech that covers our problem domain, and lets us get the job done.
+  - Adding the technology is easy, living with it is hard.
+  - You should have a process for adding technology to your stack that involves talking to other humans.
+  - Prefer technology that's well understood, with failure modes that are known.
+  - Prefer things that let you focus your attention on what really matters.
+  - Happiness comes from shipping stuff.
+related: [unix-philosophy, 12-factor-app]

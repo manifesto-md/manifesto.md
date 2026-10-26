@@ -1,0 +1,19 @@
+name: The Tao of HashiCorp
+kind: principles
+line: The eight design principles HashiCorp states as the foundation of its products and the way it approaches building infrastructure tooling.
+canonical: https://www.hashicorp.com/en/tao-of-hashicorp
+status_of_text: stable
+publisher: company
+maintainer: HashiCorp
+listing: listed
+tenets_label: The principles
+tenets:
+  - Workflows, not technologies
+  - Simple, Modular, Composable
+  - Communicating Sequential Processes
+  - Immutability
+  - Versioning through Codification
+  - Automation through Codification
+  - Resilient Systems
+  - Pragmatism
+related: [12-factor-app, unix-philosophy]
