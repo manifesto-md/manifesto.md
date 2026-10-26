@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import DocCard from '../components/DocCard.astro';
 import KindIcon from '../components/KindIcon.astro';
+import Scribble from '../components/Scribble.astro';
 import { catalog, bundles, bundlesOf, searchIndex, KIND_LABEL } from '../lib/catalog';
 const entries = await catalog();
 const allBundles = await bundles();
@@ -14,7 +15,7 @@ const bundleData = Object.fromEntries(allBundles.map((b) => [b.id, { name: b.dat
 <Base title="manifesto.md: the documents projects stand on" description={`${entries.length} manifestos, principles, specifications and conventions, each linking to its canonical text.`}>
   <main id="main" class="wrap two">
     <aside class="rail">
-      <h1>The documents projects stand on.</h1>
+      <h1>The documents projects <em>stand on<Scribble kind="underline" seed="hero" /></em>.</h1>
       <p class="sub">{entries.length} documents, canonical text and version for each.</p>
       <form class="search" role="search" action="/" data-search>
         <label class="sr" for="q">Search</label>

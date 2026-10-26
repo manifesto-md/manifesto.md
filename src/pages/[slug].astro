@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import KindIcon from '../components/KindIcon.astro';
 import DocCard from '../components/DocCard.astro';
+import Scribble from '../components/Scribble.astro';
 import { catalog, bundles, bundlesOf, badge, KIND_LABEL } from '../lib/catalog';
 export async function getStaticPaths() {
   const entries = await catalog();
@@ -19,8 +20,9 @@ const claimed = d.listing === 'claimed';
 ---
 <Base title={`${d.name} on manifesto.md`} description={d.line} path={`/${e.id}/`}>
   <main id="main" class={`wrap doc ${claimed ? 'claimed' : ''}`}>
-    <p class="meta"><KindIcon kind={d.kind} size={16} /> {KIND_LABEL[d.kind]}{d.version && <span class="tag">v{d.version}</span>}{claimed && <><span class="claim"></span> claimed</>}{unpublished && <span class="tag">unpublished</span>}{mine.map((bd: any) => <a class="bundle" href={`/bundles/${bd.id}/`}>{bd.data.name}</a>)}</p>
+    <p class="meta"><KindIcon kind={d.kind} size={16} /> {KIND_LABEL[d.kind]}{d.version && <span class="tag">v{d.version}</span>}{unpublished && <span class="tag">unpublished</span>}{mine.map((bd: any) => <a class="bundle" href={`/bundles/${bd.id}/`}>{bd.data.name}</a>)}</p>
     <h1>{d.name}{d.short && d.short !== d.name ? ` (${d.short})` : ''}</h1>
+    {claimed && <span class="hand claimednote"><Scribble kind="tick" seed={e.id} width={22} height={18} /> claimed by its maintainer</span>}
     <p class="lede">{d.line}</p>
     {unpublished && <div class="notice">The text is not public yet. The canonical link and the badge activate when it is.</div>}
     {d.note && <div class="notice">{d.note}</div>}
