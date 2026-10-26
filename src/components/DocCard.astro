@@ -6,7 +6,7 @@ const d = e.data;
 const claimed = d.listing === 'claimed';
 const unpublished = d.status_of_text === 'unpublished';
 ---
-<li class={`card ${claimed ? 'claimed' : ''} ${unpublished ? 'unpublished' : ''}`} data-slug={e.id}>
+<li class={`card ${claimed ? 'claimed' : ''} ${unpublished ? 'unpublished' : ''}`} data-slug={e.id} data-kind={d.kind} data-bundles={bundles.map((b) => b.id).join(' ')}>
   <KindIcon kind={d.kind} size={150} class="mark" decorative />
   <h3>{number && <span class="num">{number}</span>}<a href={`/${e.id}/`}>{d.name}</a></h3>
   <p class="line">{d.line}</p>

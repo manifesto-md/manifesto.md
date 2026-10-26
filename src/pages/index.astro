@@ -1,106 +1,103 @@
 ---
 import Base from '../layouts/Base.astro';
 import DocCard from '../components/DocCard.astro';
-import { catalog, bundles, bundlesOf, searchIndex } from '../lib/catalog';
+import KindIcon from '../components/KindIcon.astro';
+import { catalog, bundles, bundlesOf, searchIndex, KIND_LABEL } from '../lib/catalog';
 const entries = await catalog();
 const allBundles = await bundles();
-const shelves = [
-  { key: 'specification', title: 'Specifications and protocols', filter: (e: any) => e.data.kind === 'specification' },
-  { key: 'convention', title: 'Conventions', filter: (e: any) => e.data.kind === 'convention' },
-  { key: 'company', title: 'Corporate principles', filter: (e: any) => !['specification', 'convention'].includes(e.data.kind) && e.data.publisher === 'company' },
-  { key: 'community', title: 'Manifestos and principles', filter: (e: any) => !['specification', 'convention'].includes(e.data.kind) && e.data.publisher !== 'company' },
-];
 const index = searchIndex(entries, allBundles);
+const kinds = ['specification', 'convention', 'manifesto', 'principles'];
+const countOf = (k: string) => entries.filter((e) => e.data.kind === k).length;
 const claimedCount = entries.filter((e) => e.data.listing === 'claimed').length;
+const bundleData = Object.fromEntries(allBundles.map((b) => [b.id, { name: b.data.name, line: b.data.line, members: b.data.members }]));
 ---
 <Base title="manifesto.md: the documents projects stand on" description={`${entries.length} manifestos, principles, specifications and conventions, each linking to its canonical text.`}>
-  <main id="main" class="wrap">
-    <section class="hero">
+  <main id="main" class="wrap two">
+    <aside class="rail">
       <h1>The documents projects stand on.</h1>
-      <p class="lede">{entries.length} manifestos, principles, specifications and conventions. Canonical text, version read against, the bundles they travel in.</p>
+      <p class="sub">{entries.length} documents, canonical text and version for each.</p>
       <form class="search" role="search" action="/" data-search>
         <label class="sr" for="q">Search</label>
-        <input id="q" name="q" type="search" placeholder="Search by name, tenet, maintainer or bundle" autocomplete="off" />
+        <input id="q" name="q" type="search" placeholder="Search" autocomplete="off" />
       </form>
-      <ul class="filters" data-filters aria-label="Filter by kind">
-        <li><button type="button" data-kind="" aria-pressed="true">All</button></li>
-        <li><button type="button" data-kind="specification" aria-pressed="false">Specifications</button></li>
-        <li><button type="button" data-kind="convention" aria-pressed="false">Conventions</button></li>
-        <li><button type="button" data-kind="manifesto" aria-pressed="false">Manifestos</button></li>
-        <li><button type="button" data-kind="principles" aria-pressed="false">Principles</button></li>
-        <li><button type="button" data-kind="claimed" aria-pressed="false">Claimed · {claimedCount}</button></li>
-      </ul>
+      <nav class="facet" aria-label="Kind" data-kinds>
+        <h2>Kind</h2>
+        <button type="button" data-kind="" aria-pressed="true"><span>All</span><span class="n">{entries.length}</span></button>
+        {kinds.map((k) => <button type="button" data-kind={k} aria-pressed="false"><span><KindIcon kind={k} size={14} decorative /> {KIND_LABEL[k]}s</span><span class="n">{countOf(k)}</span></button>)}
+        <button type="button" data-kind="claimed" aria-pressed="false"><span><span class="claim"></span> Claimed</span><span class="n">{claimedCount}</span></button>
+      </nav>
+      <nav class="facet" aria-label="Bundles" data-bundlenav>
+        <h2>Bundles</h2>
+        {allBundles.map((b) => <button type="button" data-bundle={b.id} aria-pressed="false"><span>{b.data.name}</span><span class="n">{b.data.members.length}</span></button>)}
+      </nav>
       <p class="count" data-count aria-live="polite"></p>
-    </section>
-
-    <section data-bundles>
-      <h2 id="bundles">Bundles <span class="n">{allBundles.length}</span></h2>
-      <ul class="bundles">
-        {allBundles.map((b) => (
-          <li class="bcard">
-            <h3><a href={`/bundles/${b.id}/`}>{b.data.name}</a></h3>
-            <p>{b.data.line}</p>
-            <span class="n">{b.data.members.length} documents</span>
-          </li>
-        ))}
+    </aside>
+    <section class="pane" id="catalog">
+      <div class="bundlehead" data-bundlehead hidden>
+        <h2 data-bundlename></h2>
+        <p data-bundleline></p>
+        <a data-bundlelink href="/bundles/">Bundle page</a>
+      </div>
+      <ul class="grid" data-grid>
+        {entries.map((e) => <DocCard e={e} bundles={bundlesOf(e.id, allBundles)} />)}
       </ul>
-    </section>
-
-    <section id="catalog">
-      {shelves.map((s) => { const items = entries.filter(s.filter); return items.length ? (
-        <div data-group>
-          <h2>{s.title} <span class="n">{items.length}</span></h2>
-          <ul class="grid">
-            {items.map((e) => <DocCard e={e} bundles={bundlesOf(e.id, allBundles)} />)}
-          </ul>
-        </div>
-      ) : null; })}
       <p class="empty" data-empty hidden>No match. <a href="/add/">Add it</a> if it is public.</p>
     </section>
   </main>
   <script type="application/json" id="search-index" set:html={JSON.stringify(index)}></script>
+  <script type="application/json" id="bundle-data" set:html={JSON.stringify(bundleData)}></script>
   <script>
     const data = JSON.parse(document.getElementById('search-index')!.textContent || '[]');
-    const hay: Record<string, string> = {}; const kind: Record<string, string> = {};
-    for (const d of data) { hay[d.s] = [d.n, d.a, d.l, d.k, d.p, d.m, d.t, d.b].join(' ').toLowerCase(); kind[d.s] = d.k; }
+    const bundleData = JSON.parse(document.getElementById('bundle-data')!.textContent || '{}');
+    const hay: Record<string, string> = {};
+    for (const d of data) hay[d.s] = [d.n, d.a, d.l, d.k, d.p, d.m, d.t, d.b].join(' ').toLowerCase();
     const input = document.getElementById('q') as HTMLInputElement;
-    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-slug]'));
-    const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-group]'));
+    const grid = document.querySelector<HTMLElement>('[data-grid]')!;
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-slug]'));
+    const original = cards.slice();
     const count = document.querySelector<HTMLElement>('[data-count]')!;
     const empty = document.querySelector<HTMLElement>('[data-empty]')!;
-    const bundlesSection = document.querySelector<HTMLElement>('[data-bundles]')!;
-    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filters] button'));
-    let activeKind = '';
+    const head = document.querySelector<HTMLElement>('[data-bundlehead]')!;
+    const kindButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-kinds] button'));
+    const bundleButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-bundlenav] button'));
+    let kind = '', bundle = '';
+    function order() {
+      const list = bundle ? [...bundleData[bundle].members.map((m: string) => cards.find((c) => c.dataset.slug === m)!).filter(Boolean), ...original.filter((c) => !bundleData[bundle].members.includes(c.dataset.slug!))] : original;
+      for (const c of list) grid.appendChild(c);
+    }
     function apply() {
       const terms = input.value.toLowerCase().split(/\s+/).filter(Boolean);
       let shown = 0;
       for (const c of cards) {
         const s = c.dataset.slug!;
-        const kindOk = !activeKind || (activeKind === 'claimed' ? c.classList.contains('claimed') : kind[s] === activeKind);
-        const hit = kindOk && terms.every((t) => hay[s].includes(t));
+        const kindOk = !kind || (kind === 'claimed' ? c.classList.contains('claimed') : c.dataset.kind === kind);
+        const bundleOk = !bundle || bundleData[bundle].members.includes(s);
+        const hit = kindOk && bundleOk && terms.every((t) => hay[s].includes(t));
         c.hidden = !hit; if (hit) shown++;
       }
-      for (const g of groups) g.hidden = !g.querySelector('[data-slug]:not([hidden])');
-      const filtering = terms.length > 0 || !!activeKind;
-      bundlesSection.hidden = filtering;
+      order();
+      const filtering = terms.length > 0 || !!kind || !!bundle;
       count.textContent = filtering ? `${shown} of ${cards.length}` : '';
       empty.hidden = shown > 0 || !filtering;
+      head.hidden = !bundle;
+      if (bundle) {
+        head.querySelector('[data-bundlename]')!.textContent = bundleData[bundle].name;
+        head.querySelector('[data-bundleline]')!.textContent = bundleData[bundle].line;
+        (head.querySelector('[data-bundlelink]') as HTMLAnchorElement).href = `/bundles/${bundle}/`;
+      }
+      for (const b of kindButtons) b.setAttribute('aria-pressed', String((b.dataset.kind || '') === kind));
+      for (const b of bundleButtons) b.setAttribute('aria-pressed', String(b.dataset.bundle === bundle));
       const url = new URL(location.href);
-      input.value ? url.searchParams.set('q', input.value) : url.searchParams.delete('q');
-      activeKind ? url.searchParams.set('kind', activeKind) : url.searchParams.delete('kind');
+      for (const [k, v] of [['q', input.value], ['kind', kind], ['bundle', bundle]] as const) v ? url.searchParams.set(k, v) : url.searchParams.delete(k);
       history.replaceState(null, '', url);
     }
     input.addEventListener('input', apply);
     document.querySelector('[data-search]')!.addEventListener('submit', (ev) => { ev.preventDefault(); apply(); });
-    for (const b of buttons) b.addEventListener('click', () => {
-      activeKind = b.dataset.kind || '';
-      for (const x of buttons) x.setAttribute('aria-pressed', String(x === b));
-      apply();
-    });
+    for (const b of kindButtons) b.addEventListener('click', () => { kind = b.dataset.kind || ''; apply(); });
+    for (const b of bundleButtons) b.addEventListener('click', () => { bundle = bundle === b.dataset.bundle ? '' : b.dataset.bundle!; apply(); });
     const u = new URL(location.href);
-    const q0 = u.searchParams.get('q'); const k0 = u.searchParams.get('kind');
-    if (q0) input.value = q0;
-    if (k0) { activeKind = k0; for (const x of buttons) x.setAttribute('aria-pressed', String(x.dataset.kind === k0)); }
-    if (q0 || k0) apply();
+    input.value = u.searchParams.get('q') || ''; kind = u.searchParams.get('kind') || ''; bundle = u.searchParams.get('bundle') || '';
+    if (!bundleData[bundle]) bundle = '';
+    apply();
   </script>
 </Base>
