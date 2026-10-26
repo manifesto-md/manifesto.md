@@ -1,4 +1,4 @@
-name: Engineering taste
-line: Short documents on how to choose and write software well, the ones engineers quote at each other in reviews.
+name: Engineering Taste
+line: Short texts on choosing and writing software well.
 order: 60
 members: [unix-philosophy, zen-of-python, boring-technology, 12-factor-app, local-first]

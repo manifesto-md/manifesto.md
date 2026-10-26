@@ -20,3 +20,4 @@ tenets:
   - "SITE: last update, standards, components and software used in development."
   - Add a link tag in the head of the site, with rel="author" and type="text/plain", pointing at /humans.txt.
 related: [robots-txt]
+adopted_here: https://manifesto.md/humans.txt

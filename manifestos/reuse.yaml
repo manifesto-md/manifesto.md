@@ -25,3 +25,4 @@ tenets:
   - REUSE.toml and DEP5 are mutually exclusive. You MUST NOT use both simultaneously; DEP5 is deprecated and you SHOULD create a REUSE.toml file instead.
   - You SHOULD use SPDX snippets to license Snippets; each opened snippet MUST be closed with SPDX-SnippetEnd.
 related: [spdx, citation-cff]
+adopted_here: https://github.com/manifesto-md/manifesto.md/blob/main/REUSE.toml

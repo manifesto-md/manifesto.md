@@ -29,3 +29,4 @@ tenets:
   - "root: special property that should be specified at the top of the file outside of any sections."
   - It is acceptable and often preferred to leave certain EditorConfig properties unspecified.
 related: [conventional-commits]
+adopted_here: https://github.com/manifesto-md/manifesto.md/blob/main/.editorconfig

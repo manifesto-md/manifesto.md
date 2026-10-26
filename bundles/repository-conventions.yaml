@@ -1,4 +1,0 @@
-name: Repository and site conventions
-line: The files a project publishes for the tools, crawlers and people that open it, usually adopted in one pass.
-order: 30
-members: [editorconfig, agents-md, llms-txt, robots-txt, sitemaps, security-txt, well-known-uris, humans-txt, contributor-covenant]

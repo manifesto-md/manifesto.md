@@ -17,3 +17,4 @@ tenets:
   - fix correlates with a patch, feat with a minor, a breaking change footer or an exclamation mark with a major.
   - Types beyond fix and feat are allowed and recommended, such as build, chore, ci, docs, style, refactor, perf, test.
 related: [semver, keep-a-changelog]
+adopted_here: https://github.com/manifesto-md/manifesto.md/commits/main

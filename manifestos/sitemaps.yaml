@@ -23,3 +23,4 @@ tenets:
   - The location of a Sitemap file determines the set of URLs that can be included in that Sitemap; all URLs must share its protocol and host.
   - "Point search engines to a Sitemap with a Sitemap line in robots.txt, for example Sitemap: http://www.example.com/sitemap.xml."
 related: [robots-txt, llms-txt]
+adopted_here: https://manifesto.md/sitemap.xml

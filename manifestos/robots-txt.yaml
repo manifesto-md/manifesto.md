@@ -25,3 +25,4 @@ tenets:
   - Crawlers SHOULD NOT use the cached version for more than 24 hours, unless the robots.txt file is unreachable.
   - The parsing limit MUST be at least 500 kibibytes.
 related: [llms-txt, security-txt]
+adopted_here: https://manifesto.md/robots.txt

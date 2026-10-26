@@ -1,0 +1,21 @@
+---
+import KindIcon from './KindIcon.astro';
+interface Props { e: any; bundles?: any[]; number?: number }
+const { e, bundles = [], number } = Astro.props;
+const d = e.data;
+const claimed = d.listing === 'claimed';
+const unpublished = d.status_of_text === 'unpublished';
+---
+<li class={`card ${claimed ? 'claimed' : ''} ${unpublished ? 'unpublished' : ''}`} data-slug={e.id}>
+  <KindIcon kind={d.kind} size={150} class="mark" decorative />
+  <h3>{number && <span class="num">{number}</span>}<a href={`/${e.id}/`}>{d.name}</a></h3>
+  <p class="line">{d.line}</p>
+  <div class="foot">
+    {d.version && <span class="tag">v{d.version}</span>}
+    {claimed && <span class="claim" title="Claimed by its maintainer"></span>}
+    {unpublished && <span class="tag">unpublished</span>}
+    {d.adopted_here && <a class="inuse" href={d.adopted_here} title="This site uses it">in use here</a>}
+    <span class="spacer"></span>
+    {bundles.slice(0, 2).map((b) => <a class="bundle" href={`/bundles/${b.id}/`}>{b.data.name}</a>)}
+  </div>
+</li>

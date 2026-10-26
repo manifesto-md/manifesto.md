@@ -4,15 +4,15 @@ import Base from '../../layouts/Base.astro';
 <Base title="The manifesto.md badge" description="What the badge asserts, how to add it, and how a listing becomes claimed." path="/badge/">
   <main id="main" class="wrap">
     <h1>The badge</h1>
-    <p class="lede">A shields.io endpoint badge, one per listing. It says one of two things and nothing else.</p>
+    <p class="lede">One shields.io endpoint badge per listing, two states.</p>
     <dl class="facts">
-      <dt><code>listed</code></dt><dd>The document is public and appears in the directory. Anyone may have added it. The directory asserts nothing about the document.</dd>
-      <dt><code>claimed</code></dt><dd>A maintainer of the document confirmed the listing: by opening the pull request, by merging the badge into their own README, or by saying yes on the listing issue.</dd>
+      <dt><code>listed</code></dt><dd>Public and in the directory. Anyone may have added it.</dd>
+      <dt><code>claimed</code></dt><dd>A maintainer confirmed the listing: their own pull request, the badge merged into their README, or a yes on the listing issue.</dd>
     </dl>
     <h2>Add it to a README</h2>
     <pre><code>[![manifesto.md](https://img.shields.io/endpoint?url=https://manifesto.md/badge/&lt;slug&gt;.json)](https://manifesto.md/&lt;slug&gt;/)</code></pre>
     <p>The endpoint is static JSON in the shields.io endpoint schema, served from <code>/badge/&lt;slug&gt;.json</code> and cached for an hour. Nothing is tracked.</p>
     <h2>What it is not</h2>
-    <p>Not a quality mark, not a conformance claim, not an endorsement in either direction. Specifications that have a conformance mechanism carry it on their own site; this badge only says the document is listed, and by whom.</p>
+    <p>Not a quality mark, not a conformance claim, not an endorsement. Conformance lives on each specification's own site.</p>
   </main>
 </Base>

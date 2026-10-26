@@ -1,14 +1,17 @@
 ---
-interface Props { kind: string; size?: number }
-const { kind, size = 18 } = Astro.props;
+interface Props { kind: string; size?: number; class?: string; decorative?: boolean }
+const { kind, size = 18, class: cls = '', decorative = false } = Astro.props;
 const labels: Record<string, string> = { manifesto: 'Manifesto', specification: 'Specification', principles: 'Principles', convention: 'Convention' };
+const a = decorative ? { 'aria-hidden': 'true' } : { role: 'img', 'aria-label': labels[kind], title: labels[kind] };
 ---
-<span class="kind" title={labels[kind]} aria-label={labels[kind]} role="img">
-  {kind === 'manifesto' && <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18"/><path d="M5 4h11l-2 3 2 3H5"/></svg>}
-  {kind === 'specification' && <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"/><path d="M9 12h6"/></svg>}
-  {kind === 'principles' && <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>}
-  {kind === 'convention' && <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></svg>}
+<span class={`kind ${cls}`} {...a}>
+  {kind === 'manifesto' && <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M4 2h2v20H4z"/><path d="M7 3h12.5l-3.2 4 3.2 4H7z"/></svg>}
+  {kind === 'specification' && <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4v-2.5H5.5v-13H9z"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4v-2.5h3.5v-13H15z"/><path d="M8 10.8h8v2.4H8z"/></svg>}
+  {kind === 'principles' && <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15z"/><path d="m16.2 7.8-2.6 6.2-6 2.4 2.6-6.2z"/></svg>}
+  {kind === 'convention' && <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 2.5L17.5 8H14zM8 13h8v2H8zm0 4h6v2H8z"/></svg>}
 </span>
 <style>
-  .kind { display: inline-flex; align-items: center; color: var(--muted); vertical-align: -3px; }
+  .kind { display: inline-flex; align-items: center; color: var(--muted); }
+  .kind.mark { position: absolute; right: -22px; bottom: -22px; color: var(--ink); opacity: 0.055; pointer-events: none; transform: rotate(-8deg); }
+  :global(.card:hover) .kind.mark { opacity: 0.09; }
 </style>

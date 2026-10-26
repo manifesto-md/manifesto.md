@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import KindIcon from '../components/KindIcon.astro';
+import DocCard from '../components/DocCard.astro';
 import { catalog, bundles, bundlesOf, badge, KIND_LABEL } from '../lib/catalog';
 export async function getStaticPaths() {
   const entries = await catalog();
@@ -18,14 +19,14 @@ const claimed = d.listing === 'claimed';
 ---
 <Base title={`${d.name} on manifesto.md`} description={d.line} path={`/${e.id}/`}>
   <main id="main" class={`wrap doc ${claimed ? 'claimed' : ''}`}>
-    <p class="meta"><KindIcon kind={d.kind} /> <span class="kindname">{KIND_LABEL[d.kind]}</span>{d.version && <span class="tag">v{d.version}</span>}{claimed && <span class="claim" title="Claimed by its maintainer">claimed</span>}{unpublished && <span class="tag">text not yet public</span>}</p>
+    <p class="meta"><KindIcon kind={d.kind} size={16} /> {KIND_LABEL[d.kind]}{d.version && <span class="tag">v{d.version}</span>}{claimed && <><span class="claim"></span> claimed</>}{unpublished && <span class="tag">unpublished</span>}{mine.map((bd: any) => <a class="bundle" href={`/bundles/${bd.id}/`}>{bd.data.name}</a>)}</p>
     <h1>{d.name}{d.short && d.short !== d.name ? ` (${d.short})` : ''}</h1>
     <p class="lede">{d.line}</p>
-    {unpublished && <div class="notice">The text behind this listing is not public yet. The page exists so the family is complete; the badge and the canonical link go live with the text.</div>}
+    {unpublished && <div class="notice">The text is not public yet. The canonical link and the badge activate when it is.</div>}
     {d.note && <div class="notice">{d.note}</div>}
+    <p>{unpublished ? 'Canonical text: not yet published.' : <>Canonical text: <a href={d.canonical} rel="noopener">{d.canonical}</a>{d.version ? `, read against version ${d.version}.` : '.'}</>}{d.adopted_here && <> In use on this site: <a href={d.adopted_here}>{d.adopted_here.replace('https://', '')}</a>.</>}</p>
     <h2>{d.tenets_label}</h2>
     <ol class="tenets">{d.tenets.map((t: string) => <li>{t}</li>)}</ol>
-    <p>Read the text itself: {unpublished ? <span>not yet published</span> : <a href={d.canonical} rel="noopener">{d.canonical}</a>}{d.version ? `, written against version ${d.version}.` : '.'} This page is a pointer, not a copy; the author's text is the only normative one.</p>
     <h2>Facts</h2>
     <dl class="facts">
       <dt>Maintainer</dt><dd>{d.maintainer}</dd>
@@ -33,15 +34,14 @@ const claimed = d.listing === 'claimed';
       {d.license && <><dt>Licence of the text</dt><dd>{d.license}</dd></>}
       {d.first_published && <><dt>First published</dt><dd>{d.first_published}</dd></>}
       <dt>Status of the text</dt><dd>{d.status_of_text}</dd>
-      <dt>Listing</dt><dd>{claimed ? `claimed by its maintainer${d.claimed_at ? ` on ${d.claimed_at}` : ''}` : 'listed; not yet claimed by a maintainer'}</dd>
+      <dt>Listing</dt><dd>{claimed ? `claimed by the maintainer${d.claimed_at ? `, ${d.claimed_at}` : ''}` : 'listed, not yet claimed'}</dd>
     </dl>
-    {mine.length > 0 && <><h2>Bundles</h2><p>Commonly adopted together with:</p><ul>{mine.map((bd: any) => <li><a href={`/bundles/${bd.id}/`}>{bd.data.name}</a>: {bd.data.line}</li>)}</ul></>}
-    {related.length > 0 && <><h2>Read with</h2><ul>{related.map((r: any) => <li><KindIcon kind={r.data.kind} size={15} /> <a href={`/${r.id}/`}>{r.data.name}</a>: {r.data.line}</li>)}</ul></>}
+    {related.length > 0 && <><h2>Read with</h2><ul class="grid">{related.map((r: any) => <DocCard e={r} bundles={bundlesOf(r.id, allBundles)} />)}</ul></>}
     {!unpublished && <>
       <h2>Badge</h2>
       <p><img src={badgeUrl} alt={`manifesto.md: ${b.message}`} width="140" height="20" /></p>
       <pre><code>{`[![manifesto.md](${badgeUrl})](https://manifesto.md/${e.id}/)`}</code></pre>
-      <p>{claimed ? 'This listing is claimed by its maintainer.' : 'Maintainers: to claim this listing, open a pull request on the directory setting listing: claimed, or reply yes on the listing issue. The badge then reads claimed and the card is marked.'}</p>
+      {!claimed && <p>Maintainers claim a listing with a pull request setting <code>listing: claimed</code>, or a yes on the listing issue.</p>}
     </>}
   </main>
 </Base>

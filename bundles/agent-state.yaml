@@ -1,0 +1,4 @@
+name: Agent State
+line: How agent work, conversations and workspaces are recorded so several actors can continue them.
+order: 70
+members: [aop, owsf, crtx, vstar, clear, mcp]

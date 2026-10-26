@@ -23,3 +23,4 @@ tenets:
   - When there are multiple licenses, it is assumed their relationship is OR, not AND.
   - If you publish your software in an archive or registry, they (or their systems) can re-use the citation metadata; GitHub, Zenodo and Zotero read the file.
 related: [reuse, spdx]
+adopted_here: https://github.com/manifesto-md/manifesto.md/blob/main/CITATION.cff

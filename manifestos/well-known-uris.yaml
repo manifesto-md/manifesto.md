@@ -23,3 +23,4 @@ tenets:
   - "Registration requests consist of at least the following information: URI suffix, change controller, specification document(s), status and related information."
   - Because well-known locations effectively represent the entire origin, server operators should appropriately control the ability to write to them.
 related: [security-txt, robots-txt]
+adopted_here: https://manifesto.md/.well-known/security.txt

@@ -26,3 +26,4 @@ tenets:
   - The Lite Profile captures the minimum set of information required for license compliance.
   - The SPDX specification is a freely available international open standard (ISO/IEC 5962:2021).
 related: [reuse, citation-cff]
+adopted_here: https://github.com/manifesto-md/manifesto.md/blob/main/REUSE.toml

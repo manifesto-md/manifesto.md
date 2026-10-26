@@ -28,3 +28,4 @@ tenets:
   - The "Hiring" field is used for linking to the vendor's security-related job positions.
   - It is RECOMMENDED that a "security.txt" file be digitally signed using an OpenPGP cleartext signature.
 related: [robots-txt, well-known-uris]
+adopted_here: https://manifesto.md/.well-known/security.txt

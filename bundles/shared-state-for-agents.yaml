@@ -1,4 +1,0 @@
-name: Shared state for agents
-line: How agent work, conversations and workspaces are recorded so that several actors and tools can continue, replay and hand off the same state.
-order: 70
-members: [aop, owsf, crtx, vstar, clear, mcp]

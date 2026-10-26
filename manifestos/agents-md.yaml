@@ -23,3 +23,4 @@ tenets:
   - Treat AGENTS.md as living documentation.
   - One AGENTS.md works across many agents.
 related: [12fc, llms-txt, mcp]
+adopted_here: https://github.com/manifesto-md/manifesto.md/blob/main/AGENTS.md

@@ -1,4 +1,4 @@
-name: The manifestos software stands on
-line: The documents that named the movements, from free software to agile to local-first, read together as a lineage.
+name: Software Manifestos
+line: The documents that named the movements, from free software to local-first.
 order: 50
 members: [gnu-manifesto, cluetrain, agile-manifesto, reactive-manifesto, 12-factor-app, local-first, 12-factor-agents, mozilla-manifesto]

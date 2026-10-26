@@ -30,5 +30,6 @@ export const manifestoSchema = z.object({
   family: z.string().optional(),
   order: z.number().int().optional(),
   note: z.string().optional(),
+  adopted_here: z.string().url().optional(),
 });
 export type Manifesto = z.infer<typeof manifestoSchema>;

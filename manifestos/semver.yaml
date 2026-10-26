@@ -19,3 +19,4 @@ tenets:
   - Patch version when you make backward compatible bug fixes.
   - Pre-release and build metadata are available as extensions.
 related: [conventional-commits, keep-a-changelog]
+adopted_here: https://github.com/manifesto-md/manifesto.md/blob/main/CHANGELOG.md

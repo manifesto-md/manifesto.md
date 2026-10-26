@@ -26,3 +26,4 @@ tenets:
   - While sitemaps list all pages for search engines, llms.txt offers a curated overview for LLMs.
   - It can complement robots.txt by providing context for allowed content.
 related: [agents-md, robots-txt]
+adopted_here: https://manifesto.md/llms.txt

@@ -1,0 +1,4 @@
+name: Agentic Stack
+line: What an agent request meets on its way to a system, in order.
+order: 10
+members: [agents-md, llms-txt, 12fc, mcp, a2a, pact, openappa, aop]

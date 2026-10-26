@@ -1,28 +1,25 @@
 ---
 import Base from '../../layouts/Base.astro';
-import KindIcon from '../../components/KindIcon.astro';
-import { catalog, bundles } from '../../lib/catalog';
+import DocCard from '../../components/DocCard.astro';
+import { catalog, bundles, bundlesOf } from '../../lib/catalog';
 export async function getStaticPaths() {
   const entries = await catalog();
   const all = await bundles();
-  return all.map((b) => ({ params: { slug: b.id }, props: { b, entries } }));
+  return all.map((b) => ({ params: { slug: b.id }, props: { b, entries, all } }));
 }
-const { b, entries } = Astro.props;
+const { b, entries, all } = Astro.props;
 const members = b.data.members.map((m: string) => entries.find((e) => e.id === m)).filter(Boolean);
+const others = all.filter((x) => x.id !== b.id);
 ---
 <Base title={`${b.data.name}: a manifesto.md bundle`} description={b.data.line} path={`/bundles/${b.id}/`}>
-  <main id="main" class="wrap">
-    <p class="meta"><span class="tag">Bundle</span><span class="tag">{members.length} documents</span></p>
+  <main id="main" class="wrap doc">
+    <p class="meta">Bundle <span class="tag">{members.length} documents</span></p>
     <h1>{b.data.name}</h1>
     <p class="lede">{b.data.line}</p>
     <ol class="members">
-      {members.map((e: any) => (
-        <li class={`card ${e.data.listing === 'claimed' ? 'claimed' : ''}`}>
-          <h3><KindIcon kind={e.data.kind} /> <a href={`/${e.id}/`}>{e.data.name}</a>{e.data.version && <span class="tag">v{e.data.version}</span>}</h3>
-          <p>{e.data.line}</p>
-        </li>
-      ))}
+      {members.map((e: any, i: number) => <DocCard e={e} number={i + 1} bundles={bundlesOf(e.id, all).filter((x) => x.id !== b.id)} />)}
     </ol>
-    <p>Bundles are curated: documents that teams adopt in one pass or cite together. A bundle is a reading order, not a recommendation of any single document. Propose one by pull request as a file in <code>bundles/</code>.</p>
+    <h2>Other bundles</h2>
+    <ul class="bundles">{others.map((o) => <li class="bcard"><h3><a href={`/bundles/${o.id}/`}>{o.data.name}</a></h3><p>{o.data.line}</p><span class="n">{o.data.members.length} documents</span></li>)}</ul>
   </main>
 </Base>
