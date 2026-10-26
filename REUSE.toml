@@ -1,0 +1,15 @@
+# REUSE specification 3.3, https://reuse.software/spec-3.3/
+version = 1
+SPDX-PackageName = "manifesto.md"
+SPDX-PackageSupplier = "Idea Crafters LLC <open@ideacrafters.com>"
+SPDX-PackageDownloadLocation = "https://github.com/manifesto-md/manifesto.md"
+
+[[annotations]]
+path = ["src/**", "public/**", "*.json", "*.jsonc", "*.mjs", "*.ts", "Makefile", ".github/**", ".editorconfig", ".gitignore"]
+SPDX-FileCopyrightText = "2026 Idea Crafters LLC <open@ideacrafters.com>"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["manifestos/**", "bundles/**", "*.md", "CITATION.cff"]
+SPDX-FileCopyrightText = "2026 Idea Crafters LLC <open@ideacrafters.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: If you cite the directory, cite the listed document's canonical text first; this file is for citing the catalog itself.
+title: "manifesto.md: the documents projects stand on"
+type: dataset
+authors:
+  - family-names: Bitar
+    given-names: Jad
+repository-code: https://github.com/manifesto-md/manifesto.md
+url: https://manifesto.md
+license: CC-BY-4.0
+abstract: A directory of manifestos, principles documents, specifications and file conventions, one record per document with its canonical URL, the version read against, maintainer, licence of the text and the author's tenets quoted; published as pages and as JSON.
+keywords: [manifesto, specification, principles, conventions, directory, catalog]
+date-released: 2026-10-26

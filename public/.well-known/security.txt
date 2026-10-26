@@ -1,0 +1,6 @@
+# security.txt, RFC 9116
+Contact: mailto:security@ideacrafters.com
+Expires: 2027-10-26T00:00:00.000Z
+Preferred-Languages: en, fr
+Canonical: https://manifesto.md/.well-known/security.txt
+Policy: https://github.com/manifesto-md/manifesto.md/blob/main/SECURITY.md

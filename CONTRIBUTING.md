@@ -7,6 +7,10 @@
 3. `npm run build` passes locally.
 4. Open the pull request. One document per pull request.
 
+## Propose a bundle
+
+A bundle is a set of documents teams adopt in one pass or cite together. One YAML file in `bundles/`: `name`, `line` (one sentence under 240 characters), `members` (two or more existing slugs, in reading order). The build fails on an unknown slug.
+
 ## Claim a listing
 
 You maintain a listed document. Either open a pull request setting `listing: claimed`, `claimed_at` and `claimed_by` (a handle or name) on its file, or reply yes on the listing issue the directory opened on your repository. The badge then reads `claimed`. A reaction is not a claim.

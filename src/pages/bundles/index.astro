@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import { bundles } from '../../lib/catalog';
+const all = await bundles();
+---
+<Base title="Bundles on manifesto.md" description="Documents commonly adopted together, grouped as reading orders." path="/bundles/">
+  <main id="main" class="wrap">
+    <h1>Bundles</h1>
+    <p class="lede">Documents commonly adopted together. Each document page lists the bundles it belongs to.</p>
+    <ul class="grid">
+      {all.map((b) => (<li class="card"><h3><a href={`/bundles/${b.id}/`}>{b.data.name}</a></h3><p>{b.data.line}</p><div class="meta"><span class="tag">{b.data.members.length} documents</span></div></li>))}
+    </ul>
+  </main>
+</Base>

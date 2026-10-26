@@ -17,6 +17,8 @@ const url = new URL(path, Astro.site ?? 'https://manifesto.md').href;
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/json" href="/index.json" title="manifesto.md catalog" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="author" href="/humans.txt" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -25,10 +27,12 @@ const url = new URL(path, Astro.site ?? 'https://manifesto.md').href;
         <a class="brand" href="/">manifesto<span>.md</span></a>
         <nav aria-label="Primary">
           <a href="/#catalog">Catalog</a>
+          <a href="/bundles/">Bundles</a>
           <a href="/badge/">Badge</a>
           <a href="/add/">Add yours</a>
           <a href="https://github.com/manifesto-md/manifesto.md">GitHub</a>
         </nav>
+        {path !== '/' && <form class="minisearch" role="search" action="/"><label class="sr" for="hq">Search</label><input id="hq" name="q" type="search" placeholder="Search" /></form>}
       </div>
     </header>
     <slot />
@@ -75,7 +79,25 @@ const url = new URL(path, Astro.site ?? 'https://manifesto.md').href;
   .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
   .meta { display: flex; gap: 6px; flex-wrap: wrap; font-size: 0.78rem; font-family: var(--mono); }
   .tag { background: var(--tag); color: var(--tag-ink); border-radius: 4px; padding: 1px 7px; }
-  .tag.claimed { background: var(--accent); color: var(--accent-ink); }
+  .claim { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); font-weight: 600; }
+  .claim::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .card.claimed { border-color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
+  .card.unpublished { border-style: dashed; }
+  .card h3 .kind { margin-right: 2px; }
+  .bundle { font-family: var(--sans); font-size: 0.78rem; color: var(--muted); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
+  .bundle:hover { color: var(--ink); border-color: var(--ink); }
+  .kindname { color: var(--muted); font-family: var(--mono); font-size: 0.8rem; margin-right: 6px; }
+  .doc.claimed h1 { border-left: 4px solid var(--accent); padding-left: 12px; }
+  .search { margin: 8px 0 28px; }
+  .search input, .minisearch input { width: 100%; max-width: 560px; font: inherit; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); color: var(--ink); }
+  .minisearch input { width: 180px; padding: 6px 10px; font-size: 0.9rem; }
+  .count { color: var(--muted); font-size: 0.85rem; margin: 6px 0 0; min-height: 1.2em; }
+  .empty { color: var(--muted); }
+  .sr { position: absolute; left: -9999px; }
+  .members { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; counter-reset: m; }
+  .members .card { counter-increment: m; }
+  .members .card h3::before { content: counter(m) '. '; color: var(--muted); font-family: var(--mono); font-weight: 500; }
+  .members .card h3 .tag { margin-left: 8px; }
   .tenets { padding-left: 1.3em; }
   .tenets li { margin: 6px 0; }
   .facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; font-size: 0.95rem; margin: 20px 0; }

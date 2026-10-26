@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import KindIcon from '../../components/KindIcon.astro';
+import { catalog, bundles } from '../../lib/catalog';
+export async function getStaticPaths() {
+  const entries = await catalog();
+  const all = await bundles();
+  return all.map((b) => ({ params: { slug: b.id }, props: { b, entries } }));
+}
+const { b, entries } = Astro.props;
+const members = b.data.members.map((m: string) => entries.find((e) => e.id === m)).filter(Boolean);
+---
+<Base title={`${b.data.name}: a manifesto.md bundle`} description={b.data.line} path={`/bundles/${b.id}/`}>
+  <main id="main" class="wrap">
+    <p class="meta"><span class="tag">Bundle</span><span class="tag">{members.length} documents</span></p>
+    <h1>{b.data.name}</h1>
+    <p class="lede">{b.data.line}</p>
+    <ol class="members">
+      {members.map((e: any) => (
+        <li class={`card ${e.data.listing === 'claimed' ? 'claimed' : ''}`}>
+          <h3><KindIcon kind={e.data.kind} /> <a href={`/${e.id}/`}>{e.data.name}</a>{e.data.version && <span class="tag">v{e.data.version}</span>}</h3>
+          <p>{e.data.line}</p>
+        </li>
+      ))}
+    </ol>
+    <p>Bundles are curated: documents that teams adopt in one pass or cite together. A bundle is a reading order, not a recommendation of any single document. Propose one by pull request as a file in <code>bundles/</code>.</p>
+  </main>
+</Base>

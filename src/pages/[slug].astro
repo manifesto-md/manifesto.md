@@ -1,20 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
-import { catalog, badge, KIND_LABEL } from '../lib/catalog';
+import KindIcon from '../components/KindIcon.astro';
+import { catalog, bundles, bundlesOf, badge, KIND_LABEL } from '../lib/catalog';
 export async function getStaticPaths() {
   const entries = await catalog();
-  return entries.map((e) => ({ params: { slug: e.id }, props: { e, entries } }));
+  const allBundles = await bundles();
+  return entries.map((e) => ({ params: { slug: e.id }, props: { e, entries, allBundles } }));
 }
-const { e, entries } = Astro.props;
+const { e, entries, allBundles } = Astro.props;
 const d = e.data;
 const related = d.related.map((slug: string) => entries.find((x) => x.id === slug)).filter(Boolean);
+const mine = bundlesOf(e.id, allBundles);
 const b = badge(e);
 const badgeUrl = `https://img.shields.io/endpoint?url=https://manifesto.md/badge/${e.id}.json`;
 const unpublished = d.status_of_text === 'unpublished';
+const claimed = d.listing === 'claimed';
 ---
 <Base title={`${d.name} on manifesto.md`} description={d.line} path={`/${e.id}/`}>
-  <main id="main" class="wrap">
-    <p class="meta"><span class="tag">{KIND_LABEL[d.kind]}</span>{d.version && <span class="tag">v{d.version}</span>}<span class={`tag ${d.listing}`}>{unpublished ? 'text not yet public' : d.listing}</span></p>
+  <main id="main" class={`wrap doc ${claimed ? 'claimed' : ''}`}>
+    <p class="meta"><KindIcon kind={d.kind} /> <span class="kindname">{KIND_LABEL[d.kind]}</span>{d.version && <span class="tag">v{d.version}</span>}{claimed && <span class="claim" title="Claimed by its maintainer">claimed</span>}{unpublished && <span class="tag">text not yet public</span>}</p>
     <h1>{d.name}{d.short && d.short !== d.name ? ` (${d.short})` : ''}</h1>
     <p class="lede">{d.line}</p>
     {unpublished && <div class="notice">The text behind this listing is not public yet. The page exists so the family is complete; the badge and the canonical link go live with the text.</div>}
@@ -29,14 +33,15 @@ const unpublished = d.status_of_text === 'unpublished';
       {d.license && <><dt>Licence of the text</dt><dd>{d.license}</dd></>}
       {d.first_published && <><dt>First published</dt><dd>{d.first_published}</dd></>}
       <dt>Status of the text</dt><dd>{d.status_of_text}</dd>
-      <dt>Listing</dt><dd>{d.listing}{d.claimed_at ? ` (${d.claimed_at}${d.claimed_by ? `, by ${d.claimed_by}` : ''})` : ''}</dd>
+      <dt>Listing</dt><dd>{claimed ? `claimed by its maintainer${d.claimed_at ? ` on ${d.claimed_at}` : ''}` : 'listed; not yet claimed by a maintainer'}</dd>
     </dl>
-    {related.length > 0 && <><h2>Read with</h2><ul>{related.map((r: any) => <li><a href={`/${r.id}/`}>{r.data.name}</a>: {r.data.line}</li>)}</ul></>}
+    {mine.length > 0 && <><h2>Bundles</h2><p>Commonly adopted together with:</p><ul>{mine.map((bd: any) => <li><a href={`/bundles/${bd.id}/`}>{bd.data.name}</a>: {bd.data.line}</li>)}</ul></>}
+    {related.length > 0 && <><h2>Read with</h2><ul>{related.map((r: any) => <li><KindIcon kind={r.data.kind} size={15} /> <a href={`/${r.id}/`}>{r.data.name}</a>: {r.data.line}</li>)}</ul></>}
     {!unpublished && <>
       <h2>Badge</h2>
       <p><img src={badgeUrl} alt={`manifesto.md: ${b.message}`} width="140" height="20" /></p>
       <pre><code>{`[![manifesto.md](${badgeUrl})](https://manifesto.md/${e.id}/)`}</code></pre>
-      <p>{d.listing === 'claimed' ? 'This listing is claimed by its maintainer.' : 'Maintainers: to claim this listing, open a pull request on the directory setting listing: claimed, or reply yes on the listing issue. The badge then reads claimed.'}</p>
+      <p>{claimed ? 'This listing is claimed by its maintainer.' : 'Maintainers: to claim this listing, open a pull request on the directory setting listing: claimed, or reply yes on the listing issue. The badge then reads claimed and the card is marked.'}</p>
     </>}
   </main>
 </Base>

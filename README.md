@@ -16,6 +16,14 @@ One YAML file in `manifestos/`, by pull request. Public documents only; the dire
 
 `listed`: the document is public and in the directory. `claimed`: a maintainer confirmed the listing. Nothing else is asserted; see https://manifesto.md/badge/.
 
+## Bundles and search
+
+`bundles/<slug>.yaml` names documents commonly adopted together (`name`, `line`, `members` as slugs). Every document page lists its bundles; the index has a search over names, tenets, maintainers and bundles, with the query kept in the URL (`/?q=...`).
+
+## Conventions the directory adopts
+
+It lists them, so it follows them: [`llms.txt`](https://manifesto.md/llms.txt) and [`llms-full.txt`](https://manifesto.md/llms-full.txt), [`sitemap.xml`](https://manifesto.md/sitemap.xml), [`robots.txt`](https://manifesto.md/robots.txt), [`humans.txt`](https://manifesto.md/humans.txt), [`/.well-known/security.txt`](https://manifesto.md/.well-known/security.txt) (RFC 9116), `AGENTS.md`, `.editorconfig`, `CITATION.cff`, `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1), `CHANGELOG.md` (Keep a Changelog), `REUSE.toml` (REUSE 3.3, SPDX identifiers), Conventional Commits, SemVer for the directory's own version.
+
 ## Build
 
 Astro, static output, served as a Cloudflare Worker with assets.

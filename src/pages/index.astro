@@ -1,40 +1,89 @@
 ---
 import Base from '../layouts/Base.astro';
-import { catalog, KIND_LABEL } from '../lib/catalog';
+import KindIcon from '../components/KindIcon.astro';
+import { catalog, bundles, bundlesOf, searchIndex } from '../lib/catalog';
 const entries = await catalog();
+const allBundles = await bundles();
 const groups = [
   { key: 'specs', title: 'Specifications and protocols', blurb: 'Documents that say what a conforming system or tool must do, agent protocols included. Competing specifications sit side by side on purpose.', filter: (e: any) => e.data.kind === 'specification' },
   { key: 'conventions', title: 'File and format conventions', blurb: 'The files a repository or a site publishes so that tools, crawlers and agents know what to expect: each one has a canonical text that says what the file means.', filter: (e: any) => e.data.kind === 'convention' },
   { key: 'companies', title: 'From companies', blurb: 'Principles and manifestos published by businesses about how they build and work. Listed as published; a listing asserts nothing about the company.', filter: (e: any) => !['specification','convention'].includes(e.data.kind) && e.data.publisher === 'company' },
   { key: 'community', title: 'From communities, foundations and individuals', blurb: 'The manifestos and principles the craft stands on, from the Agile Manifesto onward.', filter: (e: any) => !['specification','convention'].includes(e.data.kind) && e.data.publisher !== 'company' },
 ];
+const index = searchIndex(entries, allBundles);
 ---
-<Base title="manifesto.md: the documents projects stand on" description="A directory of manifestos, principles and specifications, each linking to its canonical text, with a badge maintainers can claim.">
+<Base title="manifesto.md: the documents projects stand on" description="A directory of manifestos, principles, specifications and conventions, each linking to its canonical text, with a badge maintainers can claim.">
   <main id="main" class="wrap">
     <h1>The documents projects stand on.</h1>
-    <p class="lede">Manifestos, principles and specifications, one page each, linking to the canonical text and the version it was read against. Maintainers claim their listing; the badge says so. Seven of the specifications are ours; they are listed under the same rules as everyone else's.</p>
+    <p class="lede">Manifestos, principles, specifications and conventions, one page each, linking to the canonical text and the version it was read against. Maintainers claim their listing; a claimed card is marked. Seven of the specifications are ours; they are listed under the same rules as everyone else's.</p>
+    <form class="search" role="search" action="/" data-search>
+      <label class="sr" for="q">Search the catalog</label>
+      <input id="q" name="q" type="search" placeholder="Search 46 documents: name, tenet, maintainer, bundle…" autocomplete="off" />
+      <p class="count" data-count aria-live="polite"></p>
+    </form>
     <section id="catalog">
       {groups.map((g) => { const items = entries.filter(g.filter); return items.length ? (
-        <>
+        <div class="group" data-group>
           <h2>{g.title}</h2>
           <p class="lede">{g.blurb}</p>
           <ul class="grid">
             {items.map((e) => (
-              <li class="card">
-                <h3><a href={`/${e.id}/`}>{e.data.name}</a></h3>
+              <li class={`card ${e.data.listing === 'claimed' ? 'claimed' : ''} ${e.data.status_of_text === 'unpublished' ? 'unpublished' : ''}`} data-slug={e.id}>
+                <h3><KindIcon kind={e.data.kind} /> <a href={`/${e.id}/`}>{e.data.name}</a></h3>
                 <p>{e.data.line}</p>
                 <div class="meta">
-                  <span class="tag">{KIND_LABEL[e.data.kind]}</span>
                   {e.data.version && <span class="tag">v{e.data.version}</span>}
-                  <span class={`tag ${e.data.listing}`}>{e.data.status_of_text === 'unpublished' ? 'text not yet public' : e.data.listing}</span>
+                  {e.data.listing === 'claimed' && <span class="claim" title="Claimed by its maintainer">claimed</span>}
+                  {e.data.status_of_text === 'unpublished' && <span class="tag">text not yet public</span>}
+                  {bundlesOf(e.id, allBundles).map((b) => <a class="bundle" href={`/bundles/${b.id}/`}>{b.data.name}</a>)}
                 </div>
               </li>
             ))}
           </ul>
-        </>
+        </div>
       ) : null; })}
+      <p class="empty" data-empty hidden>Nothing matches. <a href="/add/">Add the document</a> if it is public.</p>
     </section>
+    <h2 id="bundles">Bundles</h2>
+    <p class="lede">Documents commonly adopted together. Every card above names the bundles it belongs to; each bundle has a page.</p>
+    <ul class="grid">
+      {allBundles.map((b) => (
+        <li class="card">
+          <h3><a href={`/bundles/${b.id}/`}>{b.data.name}</a></h3>
+          <p>{b.data.line}</p>
+          <div class="meta"><span class="tag">{b.data.members.length} documents</span></div>
+        </li>
+      ))}
+    </ul>
     <h2>Add a document, claim a listing</h2>
-    <p>Anyone may add a public manifesto, principles page or specification by pull request; the <a href="/add/">add page</a> has the file shape. A maintainer claims a listing by opening the pull request themselves, or by saying yes on the issue we open when we list a document we did not write. Claimed listings carry the badge state <code>claimed</code>; the rest say <code>listed</code>.</p>
+    <p>Anyone may add a public manifesto, principles page, specification or convention by pull request; the <a href="/add/">add page</a> has the file shape. A maintainer claims a listing by opening the pull request themselves, or by saying yes on the issue we open when we list a document we did not write. Claimed cards are marked; the badge reads <code>claimed</code>.</p>
   </main>
+  <script type="application/json" id="search-index" set:html={JSON.stringify(index)}></script>
+  <script>
+    const data = JSON.parse(document.getElementById('search-index')!.textContent || '[]');
+    const byslug: Record<string, string> = {};
+    for (const d of data) byslug[d.s] = [d.n, d.a, d.l, d.k, d.p, d.m, d.t, d.b].join(' ').toLowerCase();
+    const input = document.getElementById('q') as HTMLInputElement;
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-slug]'));
+    const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-group]'));
+    const count = document.querySelector<HTMLElement>('[data-count]')!;
+    const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+    function apply(q: string) {
+      const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+      let shown = 0;
+      for (const c of cards) {
+        const hay = byslug[c.dataset.slug!] || '';
+        const hit = terms.every((t) => hay.includes(t));
+        c.hidden = !hit; if (hit) shown++;
+      }
+      for (const g of groups) g.hidden = !g.querySelector('[data-slug]:not([hidden])');
+      count.textContent = terms.length ? `${shown} of ${cards.length}` : '';
+      empty.hidden = shown > 0 || terms.length === 0;
+      const url = new URL(location.href); if (q) url.searchParams.set('q', q); else url.searchParams.delete('q');
+      history.replaceState(null, '', url);
+    }
+    input.addEventListener('input', () => apply(input.value));
+    document.querySelector('[data-search]')!.addEventListener('submit', (ev) => { ev.preventDefault(); apply(input.value); });
+    const initial = new URL(location.href).searchParams.get('q'); if (initial) { input.value = initial; apply(initial); }
+  </script>
 </Base>

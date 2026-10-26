@@ -1,0 +1,4 @@
+name: The agent protocol stack
+line: What a request from an AI agent meets on its way to a system, in order; adopted together by teams building or exposing tools to agents.
+order: 10
+members: [agents-md, llms-txt, 12fc, mcp, a2a, pact, openappa, aop]

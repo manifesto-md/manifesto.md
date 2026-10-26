@@ -1,0 +1,4 @@
+name: Release hygiene
+line: The conventions a repository adopts together so that versions, commits, changelogs, licences and citations mean the same thing to every reader and tool.
+order: 20
+members: [semver, conventional-commits, keep-a-changelog, reuse, spdx, citation-cff]

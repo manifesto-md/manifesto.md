@@ -1,0 +1,14 @@
+/* TEAM */
+Maintainer: Jad Bitar
+Site: https://jadb.io
+GitHub: jadb
+Location: Montreal, Canada
+
+/* THANKS */
+Every author whose document is listed; the catalog links to their text and copies none of it.
+
+/* SITE */
+Last update: 2026/10/26
+Standards: HTML5, CSS, Markdown, YAML, JSON
+Components: Astro 7, static output, Cloudflare Workers assets
+Software: a text editor and a pull request

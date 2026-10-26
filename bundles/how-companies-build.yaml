@@ -1,0 +1,4 @@
+name: How companies say they build
+line: Published operating principles and methods from product companies, read together to compare how each turns values into ways of working.
+order: 40
+members: [tao-of-hashicorp, linear-method, shape-up, gitlab-values, posthog-values, stripe-operating-principles, netflix-culture, amazon-leadership-principles, google-ten-things, valve-handbook]
