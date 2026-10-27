@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { PRIVACY_POLICY_VERSION } from '../lib/brand-stack';
+---
+<Base title="Privacy: manifesto.md" description="What manifesto.md collects: standard server logs, and only if you choose, analytics and your email for the newsletter." path="/privacy/">
+  <main id="main" class="wrap doc">
+    <h1>Privacy</h1>
+    <p class="lede">A directory with two optional parts: analytics and an email newsletter. Neither starts until you choose it.</p>
+    <p>Last updated {PRIVACY_POLICY_VERSION}. manifesto.md is maintained by Jad Bitar, Montreal, Canada.</p>
+
+    <h2>Before you choose</h2>
+    <ul>
+      <li>No analytics and no tracking cookie. The site stores one small cookie, <code>aaarrr_consent</code>, to remember your choice on the consent banner.</li>
+      <li>Search runs in your browser against the catalog already on the page; what you type is not sent to us.</li>
+      <li>The page loads its typefaces from Google Fonts (<code>fonts.googleapis.com</code> and <code>fonts.gstatic.com</code>), so your browser requests them from Google, which receives your IP address and browser details as for any web request.</li>
+    </ul>
+
+    <h2>If you accept analytics</h2>
+    <p>We set an anonymous visitor cookie, <code>ajs_anonymous_id</code> (up to a year), and record which pages you view and which links you use, with the page address, campaign tags in the address, device type and browser. It counts visits; it is not used to identify you. Withdraw at any time with "Privacy choices" at the foot of every page: the cookie is deleted and nothing more is sent. The analytics software runs on servers we operate.</p>
+
+    <h2>If you subscribe to the newsletter</h2>
+    <p>You give your email address and tick the box. We send one email to confirm it (the newsletter starts only after you confirm), then the newsletter, each issue with an unsubscribe link and the one-click unsubscribe header. We keep a record that proves your consent: the time, the wording of the notice you saw, what you chose, your browser's user agent and a one-way digest of your network address, not the address itself. The address is used for the newsletter only; we do not sell it or share it with advertisers. Unsubscribing ends the newsletter at once and keeps the record of your choice.</p>
+
+    <h2>Who handles the data</h2>
+    <p>The site, its mail and a bot check run on Cloudflare. When you start typing in the newsletter form, your browser loads Cloudflare Turnstile from <code>challenges.cloudflare.com</code>. The system that records signups, consent and analytics runs on servers we operate.</p>
+
+    <h2>What the host may record</h2>
+    <p>Like any web server, the hosting provider may keep standard request logs (IP address, requested page, time, browser type) for security and operations. We do not combine them with other data to identify visitors.</p>
+
+    <h2>Listed documents</h2>
+    <p>The catalog describes public documents by their authors. It is not personal data about visitors, and it links to each author's own text.</p>
+
+    <h2>Your choices and contact</h2>
+    <p>To see, correct or delete what we hold about you, or to withdraw consent, open an issue at <a href="https://github.com/manifesto-md/manifesto.md/issues">github.com/manifesto-md/manifesto.md</a> (do not put personal data in it; say you want to be contacted, and the maintainer will reach out through jadb.io) or write through <a href="https://jadb.io">jadb.io</a>. If this policy changes, the date above changes.</p>
+  </main>
+</Base>
