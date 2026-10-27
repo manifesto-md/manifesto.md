@@ -1,6 +1,22 @@
 ---
+import ConsentBanner from '../components/ConsentBanner.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { consentForPage } from '../lib/aaarrr/consent';
+import { STACK } from '../lib/brand-stack';
 interface Props { title: string; description: string; path?: string }
 const { title, description, path = '/' } = Astro.props;
+
+// The consent banner configuration comes from the stack when the site is built. A production build
+// without it would ship no banner and no analytics, so it fails instead.
+const consent = await consentForPage({
+  apiUrl: STACK.apiUrl,
+  cmsUrl: STACK.cmsUrl,
+  locale: 'en',
+  projectKey: STACK.projectKey,
+  tenant: STACK.tenant,
+  umami: STACK.umami,
+});
+if (!consent && import.meta.env.PROD) throw new Error(`consent configuration for ${STACK.tenant} unavailable from ${STACK.cmsUrl}`);
 const url = new URL(path, Astro.site ?? 'https://manifesto.md').href;
 ---
 <!doctype html>
@@ -22,6 +38,9 @@ const url = new URL(path, Astro.site ?? 'https://manifesto.md').href;
     <link rel="alternate" type="application/json" href="/index.json" title="manifesto.md catalog" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="author" href="/humans.txt" />
+    {consent && (
+      <script is:inline src="/aaarrr.js" data-api-url={consent.apiUrl} data-api-key={consent.projectKey} data-tenant={STACK.tenant}></script>
+    )}
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -39,16 +58,49 @@ const url = new URL(path, Astro.site ?? 'https://manifesto.md').href;
       </div>
     </header>
     <slot />
+    {consent && path !== '/privacy/' && <Newsletter />}
     <footer class="foot">
       <div class="wrap foot-row">
         <p>Catalog text CC BY 4.0, code MIT. Listed documents belong to their authors.</p>
-        <nav aria-label="Footer"><a href="/llms.txt">llms.txt</a><a href="/index.json">JSON</a><a href="/sitemap.xml">Sitemap</a><a href="/humans.txt">humans.txt</a><a href="https://github.com/manifesto-md/manifesto.md">Source</a></nav>
+        <nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/llms.txt">llms.txt</a><a href="/index.json">JSON</a><a href="/sitemap.xml">Sitemap</a><a href="/humans.txt">humans.txt</a><a href="https://github.com/manifesto-md/manifesto.md">Source</a></nav>
       </div>
     </footer>
+    {consent && <ConsentBanner consent={consent} />}
   </body>
 </html>
 
 <style is:global>
+  /* Consent banner (vanilla-cookieconsent) in the site's paper and ink. */
+  #cc-main {
+    --cc-font-family: var(--text);
+    --cc-bg: var(--paper);
+    --cc-primary-color: var(--ink);
+    --cc-secondary-color: var(--muted);
+    --cc-btn-primary-bg: var(--ink);
+    --cc-btn-primary-color: var(--paper);
+    --cc-btn-primary-border-color: var(--ink);
+    --cc-btn-primary-hover-bg: var(--accent);
+    --cc-btn-primary-hover-color: var(--accent-ink);
+    --cc-btn-primary-hover-border-color: var(--accent);
+    --cc-btn-secondary-bg: var(--paper);
+    --cc-btn-secondary-color: var(--ink);
+    --cc-btn-secondary-border-color: var(--ink);
+    --cc-btn-secondary-hover-bg: var(--tag);
+    --cc-btn-secondary-hover-color: var(--ink);
+    --cc-btn-secondary-hover-border-color: var(--ink);
+    --cc-btn-border-radius: 0;
+    --cc-modal-border-radius: 0;
+    --cc-separator-border-color: var(--rule);
+    --cc-toggle-on-bg: var(--accent);
+    --cc-toggle-off-bg: var(--muted);
+    --cc-toggle-readonly-bg: var(--rule);
+    --cc-cookie-category-block-bg: var(--paper);
+    --cc-cookie-category-block-border: var(--rule);
+    --cc-footer-bg: var(--paper);
+    --cc-footer-color: var(--ink);
+    --cc-footer-border-color: var(--rule);
+  }
+  #cc-main .cm, #cc-main .pm { border: 1px solid var(--ink); box-shadow: none; }
   :root {
     --bg: #f6f1e8; --paper: #fbf8f2; --ink: #1c1915; --muted: #6b645a; --rule: #d9d1c3; --accent: #1f3a93; --accent-ink: #fbf8f2;
     --pencil: #b7352b; --highlight: #f3e37a; --tag: #efe8da; --tag-ink: #4a4338;

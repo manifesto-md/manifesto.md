@@ -1,0 +1,156 @@
+---
+/**
+ * Newsletter signup: one email and an opt-in checkbox the visitor ticks, a Cloudflare challenge and a
+ * honeypot. Posts to the stack's signup route with the brand's publishable key; the stack mails a
+ * confirmation link and keeps the consent record.
+ */
+import { STACK, PRIVACY_POLICY_VERSION } from '../lib/brand-stack';
+---
+<section class="nl wrap" aria-labelledby="nl-h" data-newsletter data-form-id="newsletter" data-lineup={STACK.lineup} data-topic={STACK.formTopic} data-challenge={STACK.challengeSiteKey} data-policy={PRIVACY_POLICY_VERSION}>
+  <div class="nl-box">
+    <h2 id="nl-h">New in the directory</h2>
+    <p class="nl-lede">Documents added, claimed or changed, by email.</p>
+    <form class="nl-form" novalidate>
+      <label class="sr" for="nl-email">Email address</label>
+      <div class="nl-row">
+        <input id="nl-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+        <button type="submit">Subscribe</button>
+      </div>
+      <label class="nl-opt"><input type="checkbox" name="topic" required /> <span>Send me the manifesto.md newsletter.</span></label>
+      <div class="nl-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="nl-challenge" data-challenge-box></div>
+      <p class="nl-fine">An email to confirm, then the newsletter, with an unsubscribe link in each. See the <a href="/privacy/">privacy page</a>.</p>
+      <p class="nl-msg" role="status" data-msg hidden></p>
+    </form>
+  </div>
+</section>
+<script>
+  import { answerOf, capturedId, pageContext } from '../lib/aaarrr/identity';
+  import { addressRefused, signupBody, signupKey, signupOutcome, signupRequest, siteConfigOf, utmFrom } from '../lib/aaarrr/waitlist';
+
+  interface Turnstile { render(el: HTMLElement, o: { sitekey: string; callback: (t: string) => void; 'expired-callback'?: () => void; 'error-callback'?: () => void }): string; reset(id?: string): void }
+  const SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  let turnstilePromise: Promise<Turnstile> | undefined;
+  const loadTurnstile = () => (turnstilePromise ??= new Promise<Turnstile>((resolve, reject) => {
+    const w = window as unknown as { turnstile?: Turnstile };
+    if (w.turnstile) return resolve(w.turnstile);
+    const script = Object.assign(document.createElement('script'), { src: SRC, async: true, defer: true });
+    script.addEventListener('load', () => (w.turnstile ? resolve(w.turnstile) : reject(new Error('turnstile missing'))));
+    script.addEventListener('error', () => reject(new Error('turnstile failed to load')));
+    document.head.appendChild(script);
+  }));
+
+  const MESSAGES: Record<string, string> = {
+    challenge: 'Please complete the check, then try again.',
+    invalid: 'Please check the address and try again.',
+    limited: 'Too many attempts. Please wait a minute and try again.',
+    blocked: 'Signups are not available right now.',
+    error: 'Something went wrong. Please try again.',
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-newsletter]').forEach((root) => {
+    const form = root.querySelector<HTMLFormElement>('form')!;
+    const msg = root.querySelector<HTMLElement>('[data-msg]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const box = root.querySelector<HTMLElement>('[data-challenge-box]')!;
+    const formId = root.dataset.formId ?? 'newsletter';
+    const lineup = root.dataset.lineup ?? 'newsletter';
+    const topic = root.dataset.topic ?? 'newsletter';
+    const policyVersion = root.dataset.policy ?? '';
+    const renderedAt = Date.now();
+    let token: string | undefined;
+    let widget: string | undefined;
+    let key: string | null = null;
+    const show = (text: string, ok = false) => { msg.textContent = text; msg.hidden = false; msg.dataset.ok = String(ok); };
+
+    // The challenge loads on first interaction with the form, not on every page view.
+    let challengeStarted = false;
+    const startChallenge = () => {
+      if (challengeStarted || !root.dataset.challenge) return;
+      challengeStarted = true;
+      loadTurnstile().then((t) => {
+        widget = t.render(box, { sitekey: root.dataset.challenge!, callback: (v) => { token = v; }, 'expired-callback': () => { token = undefined; }, 'error-callback': () => { token = undefined; } });
+      }).catch((e) => console.error('newsletter: challenge unavailable', e));
+    };
+    form.addEventListener('focusin', startChallenge, { once: true });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const cfg = siteConfigOf(document.querySelector('script[src$="aaarrr.js"]'));
+      if (!cfg) return show(MESSAGES.blocked);
+      startChallenge();
+      if (root.dataset.challenge && !token) return show(MESSAGES.challenge);
+      button.disabled = true;
+      key ??= signupKey();
+      const data = new FormData(form);
+      const body = signupBody({
+        email: String(data.get('email') ?? ''),
+        lineup,
+        formId,
+        topics: { [topic]: form.querySelector<HTMLInputElement>('input[name=topic]')!.checked },
+        policyVersion,
+        locale: 'en',
+        renderedAt,
+        website: String(data.get('website') ?? ''),
+        utm: utmFrom(window.location.search),
+        challengeToken: token,
+      });
+      let outcome = signupOutcome(0, undefined);
+      let answer: unknown;
+      try {
+        const { url, init } = signupRequest(cfg.apiUrl, cfg.projectKey, body, key);
+        const res = await fetch(url, init);
+        answer = await answerOf(res);
+        outcome = signupOutcome(res.status, answer);
+      } catch (e) {
+        console.error('newsletter: signup failed', e);
+        outcome = { kind: 'error' };
+      }
+      if (outcome.kind === 'joined' || outcome.kind === 'existing' || outcome.kind === 'pending') {
+        if (outcome.kind !== 'pending') key = null;
+        const props = { form_type: 'newsletter', form_id: formId, lineup, outcome: outcome.kind, ...pageContext() };
+        try {
+          const sdk = (window as unknown as { aaarrr?: { track(n: string, p: object): void; identify(id: string, t: object): Promise<void> | void } }).aaarrr;
+          sdk?.track('newsletter_subscribed', props);
+          const id = capturedId(answer);
+          if (id && sdk) await sdk.identify(id, { source: 'newsletter' });
+        } catch (e) { console.error('newsletter: analytics error', e); }
+        form.reset();
+        show(outcome.kind === 'existing' ? 'You are already subscribed.' : outcome.kind === 'pending' ? 'Your subscription is saved. The confirmation email follows shortly.' : 'Check your inbox: one email to confirm, then the newsletter starts.', true);
+        button.disabled = false;
+        return;
+      }
+      if (outcome.kind === 'challenge' || outcome.kind === 'invalid') {
+        (window as unknown as { turnstile?: Turnstile }).turnstile?.reset(widget);
+        token = undefined;
+      }
+      // "Check the address" only when the address is what the API refused.
+      const kind = outcome.kind === 'invalid' && !addressRefused(outcome) ? 'error' : outcome.kind;
+      show(MESSAGES[kind] ?? MESSAGES.error);
+      button.disabled = false;
+    });
+  });
+</script>
+
+<style>
+  .nl { margin-block: clamp(2rem, 5vw, 4rem) 0; }
+  .nl-box { border-top: 3px double var(--rule); border-bottom: 1px solid var(--rule); padding: clamp(1.25rem, 3vw, 2rem) 0; max-width: 40rem; }
+  .nl h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.15; margin: 0; }
+  .nl-lede { margin: 0.4rem 0 1rem; color: var(--muted); }
+  .nl-row { display: flex; gap: 0; border: 1px solid var(--ink); background: var(--paper); }
+  .nl-row input { flex: 1; min-width: 0; font: inherit; font-size: 1.0625rem; padding: 0.7rem 0.85rem; border: 0; background: transparent; color: var(--ink); }
+  .nl-row input:focus-visible { outline: none; }
+  .nl-row:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .nl-row button { font: inherit; font-weight: 600; padding: 0 1.1rem; border: 0; border-left: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
+  .nl-row button:hover { background: var(--accent); }
+  .nl-row button:disabled { opacity: 0.6; cursor: wait; }
+  .nl-opt { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.85rem; }
+  .nl-opt input { width: 1.1rem; height: 1.1rem; accent-color: var(--accent); flex: none; }
+  .nl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .nl-challenge { margin-top: 0.75rem; }
+  .nl-fine { margin: 0.75rem 0 0; font-size: 0.875rem; color: var(--muted); }
+  .nl-msg { margin: 0.75rem 0 0; padding: 0.5rem 0.75rem; border-left: 3px solid var(--accent); background: var(--tag); }
+  .nl-msg[data-ok='false'] { border-left-color: var(--pencil); }
+  @media (max-width: 30rem) { .nl-row { flex-direction: column; } .nl-row button { border-left: 0; border-top: 1px solid var(--ink); padding: 0.7rem; } }
+</style>
